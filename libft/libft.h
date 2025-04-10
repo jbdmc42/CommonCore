@@ -1,16 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 11:11:39 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/08 12:04:19 by joaobarb         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <unistd.h>
+#include <stdlib.h>
 
 // Function Prototypes Only
 
@@ -92,19 +81,19 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 
 // ft_strnstr
 
-void	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
 // ft_atoi
 
 int		ft_atoi(const char *str);
 
-// ft_ calloc
+// ft_calloc
 
-void	*ft_calloc(size_t count, size_t size);
+void	*ft_calloc(size_t nmemb, size_t size);
 
 // ft_strdup
 
-char	*ft_strdup(const char *s1);
+char	*ft_strdup(const char *s);
 
 // ft_substr
 
