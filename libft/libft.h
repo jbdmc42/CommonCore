@@ -97,19 +97,19 @@ char	*ft_strdup(const char *s);
 
 // ft_substr
 
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr(const char *s, unsigned int start, size_t len);
 
 // ft_strjoin
 
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin(const char *s1, const char *s2);
 
 // ft_strtrim
 
-char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_strtrim(const char *s1, const char *set);
 
 // ft_split
 
-char	**ft_split(char const *s, char c);
+char	**ft_split(const char *s, char c);
 
 // ft_itoa
 
@@ -117,7 +117,7 @@ char	*ft_itoa(int n);
 
 // ft_strmapi
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 
 // ft_striteri
 
@@ -129,11 +129,11 @@ void	ft_putchar_fd(char c, int fd);
 
 // ft_putstr_fd
 
-void	ft_putstr_fd(char const *s, int fd);
+void	ft_putstr_fd(const char *s, int fd);
 
 // ft_putendl_fd
 
-void	ft_putendl_fd(char const *s, int fd);
+void	ft_putendl_fd(const char *s, int fd);
 
 // ft_putnbr_fd
 
