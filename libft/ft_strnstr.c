@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:49:10 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/14 13:49:11 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:52:57 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	i = 0;
 	if (needle[0] == '\0')
 		return ((char *)haystack);
+	else if (!len)
+		return (NULL);
 	while (haystack[i] != '\0' && i < len)
 	{
 		if (haystack[i] == needle[0])

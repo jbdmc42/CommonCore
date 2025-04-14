@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:49:28 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/14 13:49:29 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:55:36 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	size_t	dst_len;
 	size_t	src_len;
 
-	dst_len = ft_strlen(dst);
 	src_len = ft_strlen(src);
+	if (!dstsize)
+		return (src_len);
+	dst_len = ft_strlen(dst);
 	if (dstsize <= dst_len)
 		return (dstsize + src_len);
 	j = 0;
