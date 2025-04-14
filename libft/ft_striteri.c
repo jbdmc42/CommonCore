@@ -1,29 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 13:48:29 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/14 16:17:49 by joaobarb         ###   ########.fr       */
+/*   Created: 2025/04/14 16:34:44 by joaobarb          #+#    #+#             */
+/*   Updated: 2025/04/14 16:45:59 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/* #include <stdio.h> */
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+/* void	to_uppercase(unsigned int i, char *c)
 {
-	while (*s)
+	(void)i;
+	if (*c >= 'a' && *c <= 'z')
+		*c = *c - 32;
+} */
+
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	size_t	i;
+
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i])
 	{
-		write(fd, s, 1);
-		s++;
+		f(i, &s[i]);
+		i++;
 	}
 }
 
-/* int	main(int argc, char *argv[])
+/* int main(void)
 {
-	if (argc == 2)
-		ft_putstr_fd(argv[1], 1);
+	char arr[] = "abcdef";
+	printf("Original --> %s\n", arr);
+	ft_striteri(arr, to_uppercase);
+	printf("Result --> %s\n", arr);
 	return (0);
 } */

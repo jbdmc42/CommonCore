@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:48:57 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/14 13:54:20 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/14 17:00:14 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	unsigned int	i;
 	char			*dup;
 
-	if (!s)
-		return (NULL);
+	if (!s || !len || ft_strlen(s) < start)
+		return (ft_strdup(""));
+	if (ft_strlen(s + start) < len)
+		len = ft_strlen(s + start);
 	dup = (char *)malloc((len + 1) * sizeof(char));
 	if (!dup)
 		return (NULL);

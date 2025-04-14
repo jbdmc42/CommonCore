@@ -6,12 +6,31 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:50:10 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/14 14:04:04 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:24:12 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* #include <stdio.h> */
 #include "libft.h"
+
+static char	**checkstrs(char **arr, size_t j)
+{
+	size_t	n;
+
+	n = 0;
+	while (n < j && arr[n] != NULL)
+		n++;
+	if (n == j)
+		return (arr);
+	n = 0;
+	while (n < j)
+	{
+		if (arr[n] != NULL)
+			free(arr[n]);
+		n++;
+	}
+	free(arr);
+	return (NULL);
+}
 
 static char	**copy_words(const char *s, char c, char **arr, size_t wnum)
 {
@@ -28,10 +47,7 @@ static char	**copy_words(const char *s, char c, char **arr, size_t wnum)
 		start = i;
 		while (s[i] && s[i] != c)
 			i++;
-		arr[j] = malloc((i - start + 1) * sizeof(char));
-		if (!arr[j])
-			return (NULL);
-		ft_strlcpy(arr[j], &s[start], i - start + 1);
+		arr[j] = ft_substr(s, start, (i - start));
 		j++;
 		while (s[i] && s[i] == c)
 			i++;
@@ -70,9 +86,7 @@ char	**ft_split(const char *s, char c)
 	if (!arr)
 		return (NULL);
 	arr = copy_words(s, c, arr, arrlen);
-	if (!arr)
-		return (NULL);
-	return (arr);
+	return (checkstrs(arr, arrlen));
 }
 
 /* int	main(int argc, char *argv[])

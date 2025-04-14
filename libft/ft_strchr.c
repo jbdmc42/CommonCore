@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 13:49:54 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/14 13:49:55 by joaobarb         ###   ########.fr       */
+/*   Created: 2025/04/14 17:57:30 by joaobarb          #+#    #+#             */
+/*   Updated: 2025/04/14 18:01:54 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ char	*ft_strchr(const char *s, int c)
 	int	i;
 
 	i = 0;
-	if (c == '\0')
-		return ((char *)&s[ft_strlen(s)]);
 	while (s[i])
 	{
-		if (s[i] == c)
+		if (s[i] == (char)c)
 			return ((char *)&s[i]);
 		i++;
 	}
+	if ((char)c == '\0')
+		return ((char *)&s[ft_strlen(s)]);
 	return (NULL);
 }
 

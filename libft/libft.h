@@ -6,12 +6,17 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:54:43 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/14 13:54:44 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:27:12 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
+#ifndef LIBFT_H
+
+# define LIBFT_H
+
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
 
 // Function Prototypes Only
 
@@ -141,12 +146,14 @@ void	ft_putchar_fd(char c, int fd);
 
 // ft_putstr_fd
 
-void	ft_putstr_fd(const char *s, int fd);
+void	ft_putstr_fd(char *s, int fd);
 
 // ft_putendl_fd
 
-void	ft_putendl_fd(const char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
 
 // ft_putnbr_fd
 
 void	ft_putnbr_fd(int n, int fd);
+
+#endif

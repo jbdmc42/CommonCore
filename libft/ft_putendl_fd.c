@@ -6,13 +6,13 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:50:22 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/14 13:50:22 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/14 16:17:59 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(const char *s, int fd)
+void	ft_putendl_fd(char *s, int fd)
 {
 	while (*s)
 	{

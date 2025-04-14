@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/14 13:49:06 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/14 13:49:07 by joaobarb         ###   ########.fr       */
+/*   Created: 2025/04/14 17:21:20 by joaobarb          #+#    #+#             */
+/*   Updated: 2025/04/14 17:54:57 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,24 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	char	*res;
 
-	i = ft_strlen(s) - 1;
-	if (c == '\0')
-		return ((char *)&s[ft_strlen(s)]);
-	while (i >= 0)
+	res = NULL;
+	while (*s)
 	{
-		if (s[i] == c)
-			return ((char *)&s[i]);
-		i--;
+		if (*s == (char)c)
+			res = (char *)s;
+		s++;
 	}
-	return (NULL);
+	if ((char)c == '\0')
+		return ((char *)s);
+	return (res);
 }
 
 /* int	main(void)
 {
-	char	string[20] = "Hello World!";
+	char	string[20] = "teste";
 
-	printf("%s", ft_strrchr(string, '!'));
+	printf("%s", ft_strrchr(string, 'e'));
 	return (0);
 } */
