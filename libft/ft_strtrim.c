@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 13:49:02 by joaobarb          #+#    #+#             */
+/*   Updated: 2025/04/14 13:53:39 by joaobarb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /* #include <stdio.h> */
 #include "libft.h"
 
@@ -17,7 +29,7 @@ char	*ft_strtrim(const char *s1, const char *set)
 	size_t	start;
 	size_t	end;
 	size_t	i;
-	char 	*trim;
+	char	*trim;
 
 	if (!s1 || !set)
 		return (NULL);

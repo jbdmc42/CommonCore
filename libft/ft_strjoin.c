@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 13:49:45 by joaobarb          #+#    #+#             */
+/*   Updated: 2025/04/14 13:53:25 by joaobarb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /* #include <stdio.h> */
 #include "libft.h"
 
@@ -18,7 +30,7 @@ static unsigned int	joinstrings(char *ns, const char *s, unsigned int i)
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	unsigned int	i;	
-	char 			*ns;
+	char			*ns;
 	unsigned int	s1len;
 	unsigned int	s2len;
 

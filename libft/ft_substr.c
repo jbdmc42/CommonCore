@@ -1,7 +1,19 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 13:48:57 by joaobarb          #+#    #+#             */
+/*   Updated: 2025/04/14 13:54:20 by joaobarb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* #include <stdio.h> */
 #include "libft.h"
 
-static void	copy_substr(const char *s, unsigned int start, char *dup, size_t len)
+static void	copy_str(const char *s, unsigned int start, char *dup, size_t len)
 {
 	unsigned int	j;
 	unsigned int	i;
@@ -33,7 +45,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 		return (dup);
 	}
 	i = start;
-	copy_substr(s, i, dup, len);
+	copy_str(s, i, dup, len);
 	return (dup);
 }
 

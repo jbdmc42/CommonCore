@@ -1,22 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 13:49:23 by joaobarb          #+#    #+#             */
+/*   Updated: 2025/04/14 15:13:14 by joaobarb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /* #include <stdio.h> */
 #include "libft.h"
-
-static size_t	cal_len(const char *str)
-{
-	size_t	str_len;
-
-	str_len = 0;
-	while (str[str_len] != '\0')
-		str_len++;
-	return (str_len);
-}
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	j;
 	size_t	src_len;
 
-	src_len = cal_len(src);
+	src_len = ft_strlen(src);
 	if (dstsize == 0)
 		return (src_len);
 	j = 0;

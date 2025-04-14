@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/14 13:50:10 by joaobarb          #+#    #+#             */
+/*   Updated: 2025/04/14 14:04:04 by joaobarb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 /* #include <stdio.h> */
 #include "libft.h"
 
@@ -14,18 +26,18 @@ static char	**copy_words(const char *s, char c, char **arr, size_t wnum)
 	while (s[i] && j < wnum)
 	{
 		start = i;
-		while (s[i] != c)
+		while (s[i] && s[i] != c)
 			i++;
 		arr[j] = malloc((i - start + 1) * sizeof(char));
 		if (!arr[j])
 			return (NULL);
 		ft_strlcpy(arr[j], &s[start], i - start + 1);
 		j++;
-		while(s[i] == c)
+		while (s[i] && s[i] == c)
 			i++;
 	}
 	arr[j] = NULL;
-	return(arr);
+	return (arr);
 }
 
 static size_t	count_words(const char *s, char c)
@@ -35,13 +47,13 @@ static size_t	count_words(const char *s, char c)
 
 	i = 0;
 	wnum = 0;
-	while (s[i] == c)
+	while (s[i] && s[i] == c)
 		i++;
 	while (s[i])
 	{
-		while (s[i] != c)
+		while (s[i] && s[i] != c)
 			i++;
-		while (s[i] == c)
+		while (s[i] && s[i] == c)
 			i++;
 		wnum++;
 	}
