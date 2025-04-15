@@ -34,6 +34,15 @@ SRCS += ft_putchar_fd.c
 SRCS += ft_putstr_fd.c
 SRCS += ft_putendl_fd.c
 SRCS += ft_putnbr_fd.c
+SRCS += ft_lstnew.c
+SRCS += ft_lstadd_front.c
+SRCS += ft_lstsize.c
+SRCS += ft_lstlast.c
+SRCS += ft_lstadd_back.c
+SRCS += ft_lstdelone.c
+SRCS += ft_lstclear.c
+SRCS += ft_lstiter.c
+SRCS += ft_lstmap.c
 
 OBJS = $(SRCS:.c=.o)
 
