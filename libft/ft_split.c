@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:50:10 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/14 19:24:12 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/18 09:35:52 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ char	**ft_split(const char *s, char c)
 	char	**arr;
 	size_t	arrlen;
 
+	if (!s)
+		return (NULL);
 	arrlen = count_words(s, c);
 	arr = (char **)malloc((arrlen + 1) * sizeof(char *));
 	if (!arr)

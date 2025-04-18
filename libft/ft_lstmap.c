@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/18 09:03:58 by joaobarb          #+#    #+#             */
+/*   Updated: 2025/04/18 09:17:48 by joaobarb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 /* void	del_content(void  *content)
@@ -33,6 +45,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		new_node = ft_lstnew(new_content);
 		if (!new_node)
 		{
+			del(new_content);
 			ft_lstclear(&new_list, del);
 			return (NULL);
 		}

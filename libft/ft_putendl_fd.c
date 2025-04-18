@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:50:22 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/14 16:17:59 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/18 09:37:00 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
+	if (!s)
+		return ;
 	while (*s)
 	{
 		write(fd, s, 1);

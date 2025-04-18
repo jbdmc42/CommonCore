@@ -34,17 +34,20 @@ SRCS += ft_putchar_fd.c
 SRCS += ft_putstr_fd.c
 SRCS += ft_putendl_fd.c
 SRCS += ft_putnbr_fd.c
-SRCS += ft_lstnew.c
-SRCS += ft_lstadd_front.c
-SRCS += ft_lstsize.c
-SRCS += ft_lstlast.c
-SRCS += ft_lstadd_back.c
-SRCS += ft_lstdelone.c
-SRCS += ft_lstclear.c
-SRCS += ft_lstiter.c
-SRCS += ft_lstmap.c
 
 OBJS = $(SRCS:.c=.o)
+
+BONUS = ft_lstnew.c
+BONUS += ft_lstadd_front.c
+BONUS += ft_lstsize.c
+BONUS += ft_lstlast.c
+BONUS += ft_lstadd_back.c
+BONUS += ft_lstdelone.c
+BONUS += ft_lstclear.c
+BONUS += ft_lstiter.c
+BONUS += ft_lstmap.c
+
+BONUSOBJS = $(BONUS:.c=.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -54,13 +57,19 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
+bonus: $(OBJS) $(BONUSOBJS)
+	ar rcs $(NAME) $(OBJS) $(BONUSOBJS)
+
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BONUSOBJS)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+so:
+	gcc -shared -o libft.so $(OBJS) $(BONUSOBJS)

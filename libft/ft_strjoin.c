@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:49:45 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/14 13:53:25 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/18 09:34:36 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	unsigned int	s1len;
 	unsigned int	s2len;
 
+	if (!s1 || !s2)
+		return (NULL);
 	s1len = ft_strlen(s1);
 	s2len = ft_strlen(s2);
 	ns = (char *)malloc((s1len + s2len + 1) * sizeof(char));

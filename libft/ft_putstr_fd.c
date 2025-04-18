@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 13:48:29 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/14 16:17:49 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/18 09:36:46 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
+	if (!s)
+		return ;
 	while (*s)
 	{
 		write(fd, s, 1);
