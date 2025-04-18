@@ -70,6 +70,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-so:
-	gcc -shared -o libft.so $(OBJS) $(BONUSOBJS)
