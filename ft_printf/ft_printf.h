@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/22 09:10:22 by joaobarb          #+#    #+#             */
+/*   Updated: 2025/04/22 13:30:55 by joaobarb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PRINTF_H
 
 # define FT_PRINTF_H
@@ -56,5 +68,13 @@ int	print_ptr(void *ptr, t_flags flags);
 // print_percent
 
 int	print_percent(t_flags flags);
+
+// check_flagstype
+
+int	check_flagstype(const char *format, va_list args);
+
+// init_flags
+
+void	init_flags(t_flags *flags);
 
 #endif

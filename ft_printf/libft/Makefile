@@ -1,5 +1,7 @@
 NAME = libft.a
 
+OUT_DIR = .outlibft
+
 SRCS = ft_isalpha.c 
 SRCS += ft_isdigit.c
 SRCS += ft_isalnum.c
@@ -35,7 +37,7 @@ SRCS += ft_putstr_fd.c
 SRCS += ft_putendl_fd.c
 SRCS += ft_putnbr_fd.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(addprefix $(OUT_DIR)/, $(SRCS:.c=.o))
 
 BONUS = ft_lstnew.c
 BONUS += ft_lstadd_front.c
@@ -47,26 +49,30 @@ BONUS += ft_lstclear.c
 BONUS += ft_lstiter.c
 BONUS += ft_lstmap.c
 
-BONUSOBJS = $(BONUS:.c=.o)
+BONUSOBJS = $(addprefix $(OUT_DIR)/, $(BONUS:.c=.o))
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+RM = rm -rf
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+$(OUT_DIR):
+	mkdir -p $(OUT_DIR)
+
+$(NAME): $(OBJS) $(BONUSOBJS)
+	ar rcs $(NAME) $(OBJS) $(BONUSOBJS)
 
 bonus: $(OBJS) $(BONUSOBJS)
 	ar rcs $(NAME) $(OBJS) $(BONUSOBJS)
 
-%.o: %.c
+$(OUT_DIR)/%.o: %.c | $(OUT_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(BONUSOBJS)
+	$(RM) $(OUT_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all

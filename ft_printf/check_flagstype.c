@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_flagstype.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/22 09:10:12 by joaobarb          #+#    #+#             */
+/*   Updated: 2025/04/22 13:32:12 by joaobarb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static int	special_cases(const char *format, t_flags *flags, int i)
@@ -61,7 +73,7 @@ int	check_flagstype(const char *format, va_list args)
 	init_flags(&flags);
 	i += parse_flags(format + i, &flags);
 	if (format[i] == 'c')
-		return (print_char(va_arg(args, char), flags));
+		return (print_char((char)va_arg(args, int), flags));
 	else if (format[i] == 's')
 		return (print_str(va_arg(args, char *), flags));
 	else if (format[i] == 'p')

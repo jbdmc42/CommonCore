@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/22 09:10:17 by joaobarb          #+#    #+#             */
+/*   Updated: 2025/04/22 13:26:41 by joaobarb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	ft_printf(const char *format, ...)
@@ -12,7 +24,7 @@ int	ft_printf(const char *format, ...)
 	while (format[i])
 	{
 		if (format[i] == '%' && format[i + 1])
-			count += check_flagstypes(format[i++], args);
+			count += check_flagstype(&format[i++], args);
 		else
 		{
 			write(1, &format[i], 1);
