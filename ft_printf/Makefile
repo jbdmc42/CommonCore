@@ -1,7 +1,7 @@
 NAME = libftprintf.a
 
-LIBFT_DIR = libft
-LIBFT_A = $(LIBFT_DIR)/libft.a
+LIBFT_DIR = ./libft
+LIBFT_A = ./libft/libft.a
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -14,7 +14,7 @@ SRCS += print_int.c
 SRCS += print_uint.c
 #SRCS += print_hex.c
 #SRCS += print_ptr.c
-#SRCS += print_percent.c
+SRCS += print_percent.c
 SRCS += check_flagstype.c
 SRCS += init_flags.c
 
@@ -22,12 +22,11 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(LIBFT_A):
+$(LIBFT_A): $(LIBFT_DIR)
 	make -C $(LIBFT_DIR)
 
 $(NAME): $(LIBFT_A) $(OBJS)
-	ar rcs $(NAME) $(OBJS)
-	cp $(LIBFT_A) $(NAME)
+	ar -rcs $(NAME) $(OBJS) $(LIBFT_A) $(LIBFT_DIR)/*.o
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
