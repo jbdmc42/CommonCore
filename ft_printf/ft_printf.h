@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:10:22 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/22 13:30:55 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:27:59 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 // Main Prototypes
 
-int	ft_printf(const char *format, ...);
+int		ft_printf(const char *format, ...);
 
 // Flag Struct Prototype
 
@@ -43,35 +43,35 @@ typedef struct s_flags
 
 // print_char
 
-int	print_char(char c, t_flags flags);
+int		print_char(char c, t_flags flags);
 
 // print_str
 
-int	print_str(char *s, t_flags flags);
+int		print_str(char *s, t_flags flags);
 
 // print_int
 
-int	print_int(int n, t_flags flags);
+int		print_int(int n, t_flags flags);
 
 // print_uint
 
-int	print_uint(unsigned int n, t_flags flags);
+int		print_uint(unsigned int n, t_flags flags);
 
 // print_hex
 
-int	print_hex(unsigned int n, int hex, t_flags flags);
+int		print_hex(unsigned int n, int hex, t_flags flags);
 
 // print_ptr
 
-int	print_ptr(void *ptr, t_flags flags);
+int		print_ptr(void *ptr, t_flags flags);
 
 // print_percent
 
-int	print_percent(t_flags flags);
+int		print_percent(t_flags flags);
 
 // check_flagstype
 
-int	check_flagstype(const char *format, va_list args);
+int		check_flagstype(const char *format, va_list args);
 
 // init_flags
 

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_hex.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/22 15:52:10 by joaobarb          #+#    #+#             */
+/*   Updated: 2025/04/22 15:52:11 by joaobarb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int	print_hex(unsigned int n, int hex)
+int	print_hex(unsigned int n, int hex, t_flags flags)
 {
 	
 }

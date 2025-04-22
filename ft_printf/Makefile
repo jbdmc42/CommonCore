@@ -2,7 +2,6 @@ NAME = libftprintf.a
 
 LIBFT_DIR = libft
 LIBFT_A = $(LIBFT_DIR)/libft.a
-OUT_DIR = .out
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -19,7 +18,7 @@ SRCS += print_uint.c
 SRCS += check_flagstype.c
 SRCS += init_flags.c
 
-OBJS = $(addprefix $(OUT_DIR)/, $(SRCS:.c=.o))
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
@@ -27,21 +26,19 @@ $(LIBFT_A):
 	make -C $(LIBFT_DIR)
 
 $(NAME): $(LIBFT_A) $(OBJS)
-	cp $(LIBFT_A) $(NAME)
 	ar rcs $(NAME) $(OBJS)
+	cp $(LIBFT_A) $(NAME)
 
-$(OUT_DIR):
-	mkdir -p $(OUT_DIR)
-
-$(OUT_DIR)/%.o: %.c | $(OUT_DIR)
+%.o: %.c
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
 
 clean:
 	make clean -C $(LIBFT_DIR)
-	$(RM) $(OUT_DIR)
+	$(RM) $(OBJS)
 
 fclean: clean
 	make fclean -C $(LIBFT_DIR)
 	$(RM) $(NAME)
-	
+
 re: fclean all
+
