@@ -1,0 +1,39 @@
+LVM ---> Logical Volume Manager
+
+- It's a partition manager that will help you create, delete, expand,... your disk partitions with ease without having to empty the disk.
+
+
+AppArmor & SELinux (Security-Enhanced Linux)
+
+- Both are systems that will block some programs in certain ways, making them unable to access or edit some files, manage or interact with networks, and more. 
+
+- The main difference between AppArmor and SELinux is that SELinux is a stronger, strictersystem.
+
+
+SSH ---> Secure Shell
+
+- It's a secure way of accessing other machines in our network using only the terminal.
+
+- It is most commonly used to manage servers remotly, transfer files, configure options, among other things.
+
+
+Aptitude & Apt
+
+- Both are programs to install, update and remove packets in Debian (and others).
+
+- The main difference between them is:
+
+> Apt is quicker and simpler. Uses commands such as "apt update", "apt install program_name".
+
+> Aptitude is a "smarter" dependencies problem solver, but it is usually optional.
+
+- You can use this systems to install things such as VIM, GIT and SSH in your system.
+
+
+UFW ---> Uncomplicated Firewall
+
+- It's a simple firewall to use on Linux.
+
+- Uses commands such as "ufw enable", "ufw allow 22" and "ufw status"
+
+- Helps you protect your machine against unwanted remote entries.
