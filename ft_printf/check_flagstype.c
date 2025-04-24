@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:10:12 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/22 17:29:41 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:46:39 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ int	check_flagstype(const char *format, va_list args)
 		return (print_char((char)va_arg(args, int), flags));
 	else if (format[i] == 's')
 		return (print_str(va_arg(args, char *), flags));
-	/* else if (format[i] == 'p')
-		return (print_ptr(va_arg(args, void *), flags)); */
+	else if (format[i] == 'p')
+		return (print_ptr(va_arg(args, unsigned long long), flags));
 	else if (format[i] == 'd' || format[i] == 'i')
 		return (print_int(va_arg(args, int), flags));
 	else if (format[i] == 'u')
