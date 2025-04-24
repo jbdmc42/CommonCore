@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:10:17 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/24 14:13:03 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/24 16:04:59 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,11 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (count);
 }
-/*
+
 int main(void)
 {
-//	long a = 42;
-//	long b = 59;
-	if(printf("Printf: %p \n", (void *) 255) == ft_printf("Printf: %p \n", (void *) 255))
-		printf("good");
+	/* ft_printf("---> ft_printf: %010c %010%", 'A'); */
+	printf(">%-5%<\n");
+	printf(">%05%<\n");
 	return (0);
-} */
+}
