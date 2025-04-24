@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:10:22 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/22 18:46:19 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/24 13:34:18 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		print_hex(unsigned int n, int hex, t_flags flags);
 
 // print_ptr
 
-int		print_ptr(unsigned long long ptr, t_flags flags);
+int		print_ptr(void *ptr, t_flags flags);
 
 // print_percent
 

@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:10:17 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/22 18:36:51 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/24 14:13:03 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,33 +46,12 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (count);
 }
-
-/* int main(void)
+/*
+int main(void)
 {
-	int a = -1;
-	int b = 1;
-	int c = 15;
-	int d = 16;
-	int e = 17;
-	int f = 0;
-	ft_printf(" %p ", &a);
-	ft_printf(" %p ", &b);
-	ft_printf(" %p ", &c);
-	ft_printf(" %p ", &d);
-	ft_printf(" %p ", &e);
-	ft_printf(" %p %p ", LONG_MIN, LONG_MAX);
-	ft_printf(" %p %p ", INT_MIN, INT_MAX);
-	ft_printf(" %p %p ", ULONG_MAX, -ULONG_MAX);
-	ft_printf(" %p %p ", &f, &f);
-
-	printf(" %p ", -1);
-	printf(" %p ", 1);
-	printf(" %p ", 15);
-	printf(" %p ", 16);
-	printf(" %p ", 17);
-	printf(" %p %p ", LONG_MIN, LONG_MAX);
-	printf(" %p %p ", INT_MIN, INT_MAX);
-	printf(" %p %p ", ULONG_MAX, -ULONG_MAX);
-	printf(" %p %p ", 0, 0);
+//	long a = 42;
+//	long b = 59;
+	if(printf("Printf: %p \n", (void *) 255) == ft_printf("Printf: %p \n", (void *) 255))
+		printf("good");
 	return (0);
 } */
