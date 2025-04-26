@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:51:51 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/22 16:28:25 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/26 14:17:51 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,6 @@ static int	nbr_len(unsigned int n)
 		len++;
 	}
 	return (len);
-}
-
-static int	print_padding(char c, int times)
-{
-	int	count;
-
-	count = 0;
-	while (times-- > 0)
-	{
-		ft_putchar_fd(c, 1);
-		count++;
-	}
-	return (count);
 }
 
 static int	print_sign(t_flags flags)

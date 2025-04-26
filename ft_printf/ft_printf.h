@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:10:22 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/24 15:47:34 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/26 16:30:39 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,9 @@ int		check_flagstype(const char *format, va_list args);
 // init_flags
 
 void	init_flags(t_flags *flags);
+
+// print_padding
+
+int		print_padding(char c, int times);
 
 #endif

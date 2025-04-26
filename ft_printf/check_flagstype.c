@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:06:04 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/24 13:34:29 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/04/26 15:56:34 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ int	check_flagstype(const char *format, va_list args)
 		return (print_int(va_arg(args, int), flags));
 	else if (format[i] == 'u')
 		return (print_uint(va_arg(args, unsigned int), flags));
-	/* else if (format[i] == 'x')
-		return (print_hex(va_arg(args, unsigned int), 0, flags));
+	else if (format[i] == 'x')
+		return (print_hex(va_arg(args, unsigned long int), 0, flags));
 	else if (format[i] == 'X')
-		return (print_hex(va_arg(args, unsigned int), 1, flags)); */
+		return (print_hex(va_arg(args, unsigned int), 1, flags));
 	else if (format[i] == '%')
 		return (print_percent(flags));
 	return (0);
