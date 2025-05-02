@@ -14,16 +14,11 @@ SRCS += print_int.c
 SRCS += print_uint.c
 SRCS += print_hex.c
 SRCS += print_ptr.c
-SRCS += print_percent.c
 SRCS += check_flagstype.c
-SRCS += init_flags.c
-SRCS += print_padding.c
 
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
-
-bonus: $(NAME)
 
 $(LIBFT_A): $(LIBFT_DIR)
 	make -C $(LIBFT_DIR)

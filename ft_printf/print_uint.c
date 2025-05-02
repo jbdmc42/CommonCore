@@ -3,78 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   print_uint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 15:51:51 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/26 14:17:51 by joaobarb         ###   ########.fr       */
+/*   Created: 2025/05/02 12:35:13 by jbdmc             #+#    #+#             */
+/*   Updated: 2025/05/02 12:40:16 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	nbr_len(unsigned int n)
-{
-	int	len;
-
-	len = (n == 0);
-	while (n)
-	{
-		n /= 10;
-		len++;
-	}
-	return (len);
-}
-
-static int	print_sign(t_flags flags)
-{
-	int	count;
-
-	count = 0;
-	if (flags.plus)
-	{
-		ft_putchar_fd('+', 1);
-		count++;
-	}
-	else if (flags.space)
-	{
-		ft_putchar_fd(' ', 1);
-		count++;
-	}
-	return (count);
-}
-
-static int	print_nbr(unsigned int n)
+int	print_uint(unsigned int n)
 {
 	int	count;
 
 	count = 0;
 	if (n > 9)
-		count += print_nbr(n / 10);
-	ft_putchar_fd((n % 10) + '0', 1);
+		count += print_uint(n / 10);
+	n = n % 10 + '0';
+	write(1, &n, 1);
 	count++;
-	return (count);
-}
-
-int	print_uint(unsigned int n, t_flags flags)
-{
-	int	count;
-	int	len;
-
-	count = 0;
-	len = nbr_len(n);
-	if (flags.dot && flags.precision == 0 && n == 0)
-		len = 0;
-	if (!flags.minus && (!flags.zero || flags.dot))
-		count += print_padding(' ', flags.width
-				- (len + (flags.plus || flags.space)));
-	count += print_sign(flags);
-	if (!flags.minus && flags.zero && !flags.dot)
-		count += print_padding('0', flags.width
-				- (len + (flags.plus || flags.space)));
-	count += print_padding('0', flags.precision - len);
-	if (!(flags.dot && flags.precision == 0 && n == 0))
-		count += print_nbr(n);
-	if (flags.minus)
-		count += print_padding(' ', flags.width - count);
 	return (count);
 }

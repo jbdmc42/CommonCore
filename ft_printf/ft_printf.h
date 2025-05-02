@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:10:22 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/04/26 16:30:39 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/05/02 12:25:40 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,60 +26,34 @@
 
 int		ft_printf(const char *format, ...);
 
-// Flag Struct Prototype
-
-typedef struct s_flags
-{
-	int	minus;
-	int	zero;
-	int	dot;
-	int	hashtag;
-	int	space;
-	int	plus;
-	int	width;
-	int	precision;
-}	t_flags;
-
 // Function Prototypes Only
 
 // print_char
 
-int		print_char(char c, t_flags flags);
+int		print_char(char c);
 
 // print_str
 
-int		print_str(char *s, t_flags flags);
+int		print_str(char *s);
 
 // print_int
 
-int		print_int(int n, t_flags flags);
+int		print_int(int n);
 
 // print_uint
 
-int		print_uint(unsigned int n, t_flags flags);
+int		print_uint(unsigned int n);
 
 // print_hex
 
-int		print_hex(unsigned int n, int uppercase, t_flags flags);
+int		print_hex(unsigned int n, int uppercase);
 
 // print_ptr
 
-int		print_ptr(void *ptr, t_flags flags);
-
-// print_percent
-
-int		print_percent(t_flags flags);
+int		print_ptr(void *ptr);
 
 // check_flagstype
 
 int		check_flagstype(const char *format, va_list args);
-
-// init_flags
-
-void	init_flags(t_flags *flags);
-
-// print_padding
-
-int		print_padding(char c, int times);
 
 #endif
