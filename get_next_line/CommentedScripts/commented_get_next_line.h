@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   commented_get_next_line.h                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 11:53:22 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/05/16 11:48:14 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:54:33 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 // Struct prototype	
 typedef struct s_list
 {
-	char			*stash;
-	struct s_list	*next;
+	char			*stash; // the read part of the data
+	struct s_list	*next; // a pointer to the next node
 }	t_list;
 
 // Main function prototype
