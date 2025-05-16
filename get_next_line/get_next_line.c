@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 11:53:19 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/05/16 13:44:46 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:40:51 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ static void	remove_node(t_list **head)
 	int		j;
 	char	*buf;
 
+	if (!head || !*head || !(lst_node = find_lst_node(*head)))
+		return ;
 	buf = malloc(BUFFER_SIZE + 1);
 	clean_node = malloc(sizeof(t_list));
 	if (!buf || !clean_node)
@@ -102,10 +104,7 @@ char	*get_next_line(int fd)
 	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
-	{
-		free(head);
 		return (NULL);
-	}
 	get_node(&head, fd);
 	if (!head)
 		return (NULL);

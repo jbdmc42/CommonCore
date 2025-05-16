@@ -6,32 +6,32 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 11:53:14 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/05/16 15:07:03 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/05/16 15:32:45 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	dealloc(t_list **head, t_list *clean_node, char *buf) // this function will
+void	dealloc(t_list **head, t_list *clean_node, char *buf) // this function will dealloc the memory to finish the clearence
 {
-	t_list	*tmp;
+	t_list	*tmp; // a temporary node
 
-	if (!*head)
-		return ;
-	while (*head)
+	if (!*head) // if the list is empty
+		return ; // empty return
+	while (*head) // while the current node in the list is valid
 	{
-		tmp = (*head)->next;
-		free((*head)->stash);
-		free(*head);
-		*head = tmp;
+		tmp = (*head)->next; // tmp node becomes the node after
+		free((*head)->stash); // it frees the current node
+		free(*head); // it frees the list
+		*head = tmp; // the head of he list becomes the temporary pointer
 	}
-	*head = NULL;
-	if (clean_node->stash[0])
-		*head = clean_node;
+	*head = NULL; // after the clearing process the header of the list becomes NULL to make it still a valid list
+	if (clean_node->stash[0]) // if the 1st character of the clean node is a '\0'
+		*head = clean_node; // the head of the list becomes the clean_node
 	else
 	{
-		free(buf);
-		free(clean_node);
+		free(buf); // it frees the current buffer
+		free(clean_node); // it frees the clean node
 	}
 }
 
@@ -46,28 +46,28 @@ t_list	*find_lst_node(t_list *head) // this functions searches for the last node
 
 void	ft_strcpy(t_list *head, char *str) // this function will 
 {
-	int	i;
-	int	j;
+	int	i; // counter for the current node
+	int	j; // counter for the string that will receive the information from the current node
 
-	if (!head)
-		return ;
-	j = 0;
-	while (head)
+	if (!head) // if the list is empty
+		return ; // empty return
+	j = 0; // initializes the counter at 0
+	while (head) // while the list is not empty
 	{
-		i = 0;
-		while (head->stash[i])
+		i = 0; // initializes the counter at 0
+		while (head->stash[i]) // while the current character in the current node is not a '\0'
 		{
-			if (head->stash[i] == '\n')
+			if (head->stash[i] == '\n') // if the current character in the current node is a '\n'
 			{
-				str[j++] = '\n';
-				str[j] = '\0';
-				return ;
+				str[j++] = '\n'; // the next character on the string becomes the '\n'
+				str[j] = '\0'; // the current character becomes the '\0'
+				return ; // it ends the loop with an "empty" string
 			}
-			str[j++] = head->stash[i++];
+			str[j++] = head->stash[i++]; // else it copies the current character on the line in the current node to the string
 		}
-		head = head->next;
+		head = head->next; // skips to the next node
 	}
-	str[j] = '\0';
+	str[j] = '\0'; // gives it the '\0' character in the end
 }
 
 int	ft_strlen(t_list *head) // this function will calculate the size of the main buffer
