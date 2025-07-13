@@ -14,7 +14,21 @@ PRINTF_A	= $(PRINTF_DIR)/libftprintf.a
 
 INCLUDES	= -I. -I$(MLX_DIR) -I$(PRINTF_DIR)
 
-SRCS		= main.c img_handling.c so_long_gnl.c so_long_utils.c
+SRCS		= main.c \
+			animation_handling.c \
+			elements_check.c \
+			enemies_handling.c \
+			flood_fill.c \
+			ft_gnl.c \
+			map_check.c \
+			player_handling.c \
+			player_movement.c \
+			pre_game_checks.c \
+			read_map.c \
+			render_map.c \
+			sprite_check.c \
+			sprites_handling.c \
+			window_and_input_handling.c
 OBJS		= $(SRCS:.c=.o)
 
 all: $(MLX_DIR)/libmlx.a $(PRINTF_A) $(NAME)
