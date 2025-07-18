@@ -25,6 +25,7 @@ SRCS		= main.c \
 			player_movement.c \
 			pre_game_checks.c \
 			read_map.c \
+			render_hud.c \
 			render_map.c \
 			sprite_check.c \
 			sprites_handling.c \

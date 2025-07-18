@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:27:59 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/16 12:28:43 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/18 18:46:47 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct	s_enemies
 	void	*frames[3];
 }	t_enemies;
 
-typedef struct s_enemy_counter
+typedef struct	s_enemy_counter
 {
 	int		enemy_x;
 	int		enemy_y;
@@ -100,18 +100,23 @@ typedef struct	s_game					// main struct
 	t_elements		elements;
 	t_enemy_counter	*enemy_counter;
 
+	int				map_height;
+	int				map_width;
 	int				collectible_frame;	// current frame for the animations
 	int				enemy_frame;
 	int				dir;            	// player direction
 	int				moving;         	// movement flag
 	int				anim_state;     	// animation state (switch between Movement1 & Movement2)
 	int				frame_counter;  	// animation speed controller
+	int				seconds_elapsed;	// game time
+	int				minutes_elapsed;
+	int				time_frame_counter;
 	int				player_x;			// player coordinates
 	int				player_y;
 	int				move_counter;		// counter for the moves display
-	int				collected;			// number of grabbed collectibles
 	int				game_state;			// game state (active = 0, lose = 1, win = 2)
 	int				enemy_num;			// amount of enemies on the level
+	char			*map_name;			// the map name is actually the number of the level
 }	t_game;
 
 // animation_handling.c:
@@ -163,6 +168,10 @@ int		has_invalid_chars(char **map);
 // 	read_map.c:
 char	**read_map(const char *filepath);
 
+//	render_hud.c:
+void	render_hud_moves_and_collectibles(t_game *game);
+void	render_hud_level_player_pos(t_game *game);
+
 // 	render_map.c:
 void    render_tile(t_game *game, char tile, int x, int y);
 void	render_map(t_game *game);
@@ -183,6 +192,8 @@ void	load_player_sprites(t_game *game);
 void	player_movement_wrapper(t_game *game, char tile, int new_x, int new_y);
 void	check_for_enemies(t_game *game, char tile);
 int		get_enemy_axis(char c);
+int		check_fd(int fd);
+char	*extract_map_name(const char *filepath);
 
 // 	window_and_input_handling.c:
 int		handle_key(int keycode, void *param);

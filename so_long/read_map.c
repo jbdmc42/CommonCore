@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 23:28:17 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/18 12:52:18 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/18 17:50:40 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,16 +106,19 @@ char	**read_map(const char *filepath)
 	char	**map;
 
 	fd = open(filepath, O_RDONLY);
-	if (fd < 0)
+	if (check_fd(fd))
 		return (NULL);
 	lines = count_lines(fd);
 	fd = open(filepath, O_RDONLY);
-	if (fd < 0)
+	if (check_fd(fd))
 		return (NULL);
 	map = allocate_and_fill_map(fd, lines);
-	if (!map || !validate_lines(map))
+	if (!map)
 	{
+		ft_printf("Error\n \xE2\x88\x9F invalid map\n");
 		return (NULL);
 	}
+	if (!validate_lines(map))
+		return (NULL);
 	return (map);
 }

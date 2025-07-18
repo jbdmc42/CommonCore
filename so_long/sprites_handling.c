@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 14:56:10 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/13 18:29:33 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/18 15:37:24 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	load_map_and_enemies_sprites(t_game *game)
 	int	w;
 	int	h;
 
-	game->img_ground = mlx_xpm_file_to_image(game->mlx, "assets/ground/GroundWithGrass.xpm", &w, &h);
+	game->img_ground = mlx_xpm_file_to_image(game->mlx, "assets/ground/Ground.xpm", &w, &h);
 	game->img_wall = mlx_xpm_file_to_image(game->mlx, "assets/walls/Wall.xpm", &w, &h);
 	game->enemies.frames[0] = mlx_xpm_file_to_image(game->mlx, "assets/enemy/Enemy1.xpm", &w, &h);
 	game->enemies.frames[1] = mlx_xpm_file_to_image(game->mlx, "assets/enemy/Enemy2.xpm", &w, &h);

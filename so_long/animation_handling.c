@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 16:08:42 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/18 11:22:37 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/18 17:40:05 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	update_animation(t_game *game)
 		update_player_animation(game, frame);
 		update_enemies(game, frame);
 		render_map(game);
+		render_hud_moves_and_collectibles(game);
+		render_hud_level_player_pos(game);
 	}
 }
 

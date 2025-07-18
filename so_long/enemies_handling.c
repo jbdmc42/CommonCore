@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:54:12 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/18 11:23:02 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/18 18:21:11 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	update_enemies(t_game *game, int frame)
 {
 	int	i;
 
-	if (frame % 300 != 0)
+	if (frame % 600 != 0)
 		return ;
 	i = 0;
 	while (i < game->enemy_num)
@@ -26,7 +26,7 @@ void	update_enemies(t_game *game, int frame)
 	}
 }
 
-static void	define_enemy_movement(t_game *game, int count)
+void	define_enemy_movement(t_game *game, int count)
 {
 	int	y;
 	int	x;
@@ -43,7 +43,6 @@ static void	define_enemy_movement(t_game *game, int count)
 				game->enemy_counter[count].enemy_y = y;
 				game->enemy_counter[count].enemy_axis = get_enemy_axis(game->map[y][x]);
 				game->enemy_counter[count].enemy_dir = 1;
-				game->map[y][x] = 'X';
 				count++;
 			}
 			x++;
@@ -78,9 +77,22 @@ void	init_enemies(t_game *game)
 	define_enemy_movement(game, 0);
 }
 
-static int	is_valid_enemy_move(char tile)
+static int	is_valid_enemy_move(t_game *game, char tile)
 {
-	if (tile == '0' || tile == 'P')
+	int	w;
+	int	h;
+
+	w = game->map_width;
+	h = game->map_height;
+	if (tile == 'P')
+	{
+		ft_printf("Oh no, you lost! Better luck next time.\n");
+		mlx_string_put(game->mlx, game->win, w * 0.5, h * 0.5, 0x00FF00,
+			"Oh no, you lost! Better luck next time. ");
+		mlx_string_put(game->mlx, game->win, (w + 40) * 0.5, h * 0.5,
+			0x00FF00, "Press ESC to close the game");
+	}
+	if (tile == '0')
 		return (1);
 	return (0);	
 }
@@ -98,7 +110,7 @@ void	move_enemy(t_game *game, t_enemy_counter *enemy_counter)
 	else
 		new_x += enemy_counter->enemy_dir;
 	tile = game->map[new_y][new_x];
-	if (!is_valid_enemy_move(tile))
+	if (!is_valid_enemy_move(game, tile))
 	{
 		enemy_counter->enemy_dir *= -1;
 		return ;
