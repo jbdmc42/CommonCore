@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:52:15 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/13 17:35:44 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/16 10:58:44 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	handle_key(int keycode, void *param)
 
 	game = (t_game *)param;
 	if (keycode == KEY_ESC)
+	{
+		ft_printf("Game closed successfully by player input.\n");
 		handle_close(game);
+	}
 	else if (keycode == KEY_R)
 		return(reset_game(game), 0);
 	else

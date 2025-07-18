@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 15:38:09 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/13 11:49:10 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/16 12:09:43 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	have_all_targets_been_reached(char **map)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == 'C' || map[y][x] == 'E' || map[y][x] == 'X')
+			if (map[y][x] == 'C' || map[y][x] == 'E' || map[y][x] == 'X' || map[y][x] == 'Y')
 				return (0);
 			x++;
 		}

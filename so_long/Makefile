@@ -28,6 +28,7 @@ SRCS		= main.c \
 			render_map.c \
 			sprite_check.c \
 			sprites_handling.c \
+			utils.c \
 			window_and_input_handling.c
 OBJS		= $(SRCS:.c=.o)
 

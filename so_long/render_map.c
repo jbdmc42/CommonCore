@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:06:44 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/13 18:22:54 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/16 12:11:57 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void    render_tile(t_game *game, char tile, int x, int y)
 	else if (tile == 'C')
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->collectible.frames[0], px, py);
-	else if (tile == 'X')
+	else if (tile == 'X' || tile == 'Y')
 		mlx_put_image_to_window(game->mlx, game->win,
 			game->enemies.frames[0], px, py);
 }

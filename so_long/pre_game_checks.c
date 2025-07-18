@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:40:54 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/13 11:43:57 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/16 12:09:12 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	has_invalid_chars(char **map)
 		{
 			if (map[y][x] != '0' && map[y][x] != '1' &&
 				map[y][x] != 'P' && map[y][x] != 'E' &&
-				map[y][x] != 'C' && map[y][x] != 'X')
+				map[y][x] != 'C' && map[y][x] != 'X' &&
+				map[y][x] != 'Y')
 			{
 				ft_printf("Error\n \xE2\x88\x9F");
 				ft_printf(" map has invalid characters: '%c'\n", map[y][x]);

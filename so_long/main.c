@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:47:50 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/13 18:49:04 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/18 12:50:43 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	init_game_state(t_game *game)
 	game->move_counter = 0;
 	game->collected = 0;
 	game->game_state = GAME_RUNNING;
+	init_enemies(game);
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
@@ -92,14 +93,14 @@ int	main(int argc, char **argv)
 		ft_printf("Error\n \xE2\x88\x9F invalid map or map path\n");
 		return (1);
 	}
-	game.elements.e_total_collectibles = game.elements.e_collectible;
-	ft_printf("Collectibles count: %i\n", game.elements.e_total_collectibles);
 	init_game_state(&game);
 	if (!validate_map(&game) || !is_map_elements_valid(game.map, &game))
 	{
 		free_map(game.map);
 		return (1);
 	}
+	game.elements.e_total_collectibles = game.elements.e_collectible;
+	ft_printf("Collectibles count: %i\n", game.elements.e_total_collectibles);
 	ft_printf("Player starting on position [%i , %i]\n", game.player_x, game.player_y);
 	start_game(&game);
 	return (0);

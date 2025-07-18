@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 16:08:42 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/13 18:48:24 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/18 11:22:37 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	update_player_animation(t_game *game, int frame)
 
 void	update_animation(t_game *game)
 {
-	static int	frame = 0;
+	static int	frame;
 
 	if (++game->frame_counter >= 10)
 	{
@@ -83,6 +83,7 @@ void	update_animation(t_game *game)
 		update_enemy_animation(game, frame);
 		update_collectible_animation(game, frame);
 		update_player_animation(game, frame);
+		update_enemies(game, frame);
 		render_map(game);
 	}
 }
