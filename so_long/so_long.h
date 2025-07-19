@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:27:59 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/18 18:46:47 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/19 13:51:46 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,12 +188,15 @@ void	load_map_and_enemies_sprites(t_game *game);
 void	load_collectible_sprites(t_game *game);
 void	load_player_sprites(t_game *game);
 
-// utils.c:
+//	utils_first.c:
 void	player_movement_wrapper(t_game *game, char tile, int new_x, int new_y);
 void	check_for_enemies(t_game *game, char tile);
 int		get_enemy_axis(char c);
 int		check_fd(int fd);
 char	*extract_map_name(const char *filepath);
+
+//	utils_second.c:
+int	check_walls(char **map, int width, int height);
 
 // 	window_and_input_handling.c:
 int		handle_key(int keycode, void *param);

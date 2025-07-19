@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:47:50 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/18 18:15:51 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/19 11:31:12 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,12 @@ static void	start_game(t_game *game)
 	int	w;
 	int	h;
 
-	h = 0;
-	w = 0;
+	h = 0, w = 0;
 	while (game->map[0][w])
 		w++;
 	while (game->map[h])
 		h++;
-	game->map_width = w;
-	game->map_height = h;
+	game->map_width = w, game->map_height = h;
 	game->win = mlx_new_window(game->mlx, w * 36, h * 36, "so_long");
 	if (!game->win)
 	{
@@ -83,9 +81,8 @@ int	main(int argc, char **argv)
 
 	if (argc != 2 || !is_valid_file_extension(argv[1]))
 	{
-		ft_printf("Error\n \xE2\x88\x9F invalid argument count, format ");
-		ft_printf("or file extension\n");
-		return (ft_printf("Usage: ./so_long <map.ber>\n"), 1);
+		ft_printf("Error\n \xE2\x88\x9F invalid argument count, format or fi");
+		return (ft_printf("le extension\nUsage: ./so_long <map.ber>\n"), 1);
 	}
 	game.map = read_map(argv[1]);
 	if (!game.map)
@@ -96,10 +93,7 @@ int	main(int argc, char **argv)
 		1);
 	init_game_state(&game);
 	if (!validate_map(&game) || !is_map_elements_valid(game.map, &game))
-	{
-		free_map(game.map);
-		return (1);
-	}
+		return (free(game.map), 1);
 	game.elements.e_total_collectibles = game.elements.e_collectible;
 	start_game(&game);
 	return (0);

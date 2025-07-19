@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:47:17 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/18 17:50:15 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/19 13:09:05 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static int	create_map_copies(t_game *game, char ***copy, char ***backup)
 	{
 		free_map(*copy);
 		free_map(*backup);
-		ft_printf("Error\n \xE2\x88\x9F failed to copy map\n");
-		return (0);
+		return (ft_printf("Error\n \xE2\x88\x9F failed to copy map\n"), 0);
 	}
 	return (1);
 }
@@ -44,37 +43,19 @@ int	is_map_rectangular(char **map)
         height++;
 	if (width >= (size_t)height)
 		return (1);
-	ft_printf("Error\n \xE2\x88\x9F map is not rectangular\n");
-	return (0);
+	return (ft_printf("Error\n \xE2\x88\x9F map is not rectangular\n"), 0);
 }
 
 int	is_map_surrounded(char **map)
 {
-	int	i;
-	int	j;
-	int	width = ft_strlen(map[0]);
-	int	height = 0;
+	int	width; 
+	int	height;
 
+	width = ft_strlen(map[0]);
+	height = 0;
 	while (map[height])
 		height++;
-	i = 0;
-	while (i < height)
-	{
-		if (i == 0 || i == height - 1)
-		{
-			j = 0;
-			while (j < width)
-				if (map[i][j++] != '1')
-					return (0);
-		}
-		else
-		{
-			if (map[i][0] != '1' || map[i][width - 1] != '1')
-				return (0);
-		}
-		i++;
-	}
-	return (1);
+	return (check_walls(map, width, height));
 }
 
 int	validate_map_basic(char **map)

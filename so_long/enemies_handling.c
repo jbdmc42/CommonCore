@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:54:12 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/07/18 18:21:11 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/07/19 11:10:20 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,23 +78,15 @@ void	init_enemies(t_game *game)
 }
 
 static int	is_valid_enemy_move(t_game *game, char tile)
-{
-	int	w;
-	int	h;
-
-	w = game->map_width;
-	h = game->map_height;
+{	
 	if (tile == 'P')
 	{
 		ft_printf("Oh no, you lost! Better luck next time.\n");
-		mlx_string_put(game->mlx, game->win, w * 0.5, h * 0.5, 0x00FF00,
-			"Oh no, you lost! Better luck next time. ");
-		mlx_string_put(game->mlx, game->win, (w + 40) * 0.5, h * 0.5,
-			0x00FF00, "Press ESC to close the game");
+		handle_close(game);
 	}
 	if (tile == '0')
 		return (1);
-	return (0);	
+	return (0);
 }
 
 void	move_enemy(t_game *game, t_enemy_counter *enemy_counter)
