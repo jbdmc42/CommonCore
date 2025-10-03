@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:27:59 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/03 02:52:27 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/03 03:04:48 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,61 +39,58 @@
 # define GAME_WON 2
 
 // PLAYER_STRUCT
-typedef struct	s_player
+typedef struct s_player
 {
 	void		*idle[4];
 	void		*move1[4];
 	void		*move2[4];
-}t_player;
+}	t_player;
 
 // COLLECTIBLE_STRUCT
-typedef struct	s_collectible
+typedef struct s_collectible
 {
 	void	*frames[9];
-}t_collectible;
+}	t_collectible;
 
 // ENEMIES_STRUCTS
-typedef struct	s_enemies
+typedef struct s_enemies
 {
 	void	*frames[3];
-}t_enemies;
+}	t_enemies;
 
-typedef struct	s_enemy_counter
+typedef struct s_enemy_counter
 {
 	int		enemy_x;
 	int		enemy_y;
 	int		enemy_axis;
 	int		enemy_dir;
-}t_enemy_counter;
+}	t_enemy_counter;
 
 // EXIT_STRUCT
-typedef struct 	s_exit
+typedef struct s_exit
 {
 	void	*frames[11];
-}t_exit;
+}	t_exit;
 
 // ELEMENTS_STRUCT
-typedef struct	s_elements
+typedef struct s_elements
 {
 	int		e_player;
 	int		e_exit;
 	int		e_collectible;
 	int		e_total_collectibles;
-}t_elements;
-
+}	t_elements;
 
 // GAME_STRUCT
-typedef struct	s_game					// main struct
+typedef struct s_game
 {
 	void			*mlx;				// MiniLibX init
 	void			*win;				// window init
 	char			**map;				// map init
 	char			**original_map;		// original map state
-
 	void			*img_wall;			// ground wall
 	void			*img_ground;		// ground image
 	void			*player_sprite;		// player image
-
 	t_player		player;				// dedicated structs
 	t_collectible	collectible;
 	t_enemies		enemies;
@@ -106,10 +103,10 @@ typedef struct	s_game					// main struct
 	int				collectible_frame;	// current animation frames
 	int				enemy_frame;
 	int				exit_frame;			// exit animation frame index
-	int				dir;		    	// player direction
-	int				moving;	    	// movement flag
-	int				anim_state;	    	// movement frame toggle
-	int				frame_counter;	    	// animation speed control
+	int				dir;				// player direction
+	int				moving;				// movement flag
+	int				anim_state;			// movement frame toggle
+	int				frame_counter;		// animation speed control
 	int				player_x;			// player coordinates
 	int				player_y;
 	int				move_counter;		// moves display counter
@@ -117,7 +114,7 @@ typedef struct	s_game					// main struct
 	int				enemy_num;			// enemies on the level
 	char			*map_name;			// map name (level)
 	int				move_delay;
-}t_game;
+}	t_game;
 
 // animation_handling.c:
 void	update_collectible_animation(t_game *game, int frame);
@@ -135,7 +132,7 @@ void	init_enemies(t_game *game);
 void	move_enemy(t_game *game, t_enemy_counter *enemy_counter);
 
 // flood_fill.c:
-void 	flood_fill(char **map, int x, int y);
+void	flood_fill(char **map, int x, int y);
 int		have_all_targets_been_reached(char **map);
 int		count_map_lines(char **map);
 void	free_map(char **map);
@@ -159,7 +156,7 @@ int		validate_map(t_game *game);
 
 // player_handling.c:
 void	check_correct_player_input(int keycode, t_game *game);
-void 	find_player_position(t_game *game);
+void	find_player_position(t_game *game);
 void	update_player_direction(t_game *game, int new_x, int new_y);
 
 // player_movement.c:
@@ -169,7 +166,7 @@ void	handle_collectible(t_game *game, int x, int y);
 int		is_move_valid(char tile, t_game *game);
 
 // pre_game_checks.c:
-int	 	is_valid_file_extension(const char *filename);
+int		is_valid_file_extension(const char *filename);
 int		has_invalid_chars(char **map);
 
 // map_io.c:
@@ -180,7 +177,7 @@ void	render_hud_moves_and_collectibles(t_game *game);
 void	render_hud_level_player_pos(t_game *game);
 
 // render_map.c:
-void    render_tile(t_game *game, char tile, int x, int y);
+void	render_tile(t_game *game, char tile, int x, int y);
 void	render_map(t_game *game);
 
 // sprite_check.c:
@@ -206,7 +203,7 @@ void	check_for_enemies(t_game *game, char tile);
 // utils_second.c:
 int		check_walls(char **map, int width, int height);
 void	init_vars(t_game *game);
-char		*prepare_moves_str(t_game *game);
+char	*prepare_moves_str(t_game *game);
 void	print_idle_error(int j);
 
 // enemies_utils.c:
@@ -215,7 +212,7 @@ int		count_enemies_on_map(t_game *game);
 
 // path_utils.c:
 int		check_fd(int fd);
-char		*extract_map_name(const char *filepath);
+char	*extract_map_name(const char *filepath);
 
 // verify_enemy_movement.c:
 int		is_enemy_mov_poss(char **map);
