@@ -7,6 +7,19 @@ CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 #CFLAGS		= -Wall -Wextra -Werror	-fsanitize=leak -g -O1
 
+# Optional linker flags (populated by sanitizer modes)
+LDFLAGS		=
+
+# Enable sanitizers with: `make clean && make ASAN=1` or `make UBSAN=1`
+ifeq ($(ASAN),1)
+CFLAGS		+= -fsanitize=address -fno-omit-frame-pointer -g -O1
+LDFLAGS		+= -fsanitize=address
+endif
+ifeq ($(UBSAN),1)
+CFLAGS		+= -fsanitize=undefined -g -O1
+LDFLAGS		+= -fsanitize=undefined
+endif
+
 MLX_DIR		= minilibx
 PRINTF_DIR	= ft_printf
 
@@ -21,21 +34,27 @@ SRCS		= main.c \
 			enemies_handling.c \
 			flood_fill.c \
 			free_all_and_exit.c \
+			free_utils.c \
 			ft_gnl.c \
 			map_check.c \
 			player_handling.c \
 			player_movement.c \
 			pre_game_checks.c \
-			read_map.c \
+			map_io.c \
 			render_hud.c \
 			render_map.c \
 			sprite_check.c \
-			sprites_handling.c \
+			sprites_player.c \
+			sprites_world.c \
+			sprites_world_utils.c \
 			utils_first.c \
 			utils_second.c \
-			utils_third.c \
 			verify_enemy_movement.c \
-			window_and_input_handling.c
+			window_and_input_handling.c \
+			window_input.c \
+			enemies_utils.c \
+			path_utils.c \
+			key_input.c
 OBJS		= $(SRCS:.c=.o)
 
 all: $(MLX_DIR)/libmlx.a $(PRINTF_A) $(NAME)
@@ -47,7 +66,7 @@ $(PRINTF_A):
 	@$(MAKE) -C $(PRINTF_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(MLX_LIB) $(PRINTF_A) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(MLX_LIB) $(PRINTF_A) $(LDFLAGS) -o $(NAME)
 
 %.o: %.c so_long.h
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
@@ -63,4 +82,11 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+# Convenience targets
+asan:
+	$(MAKE) clean && $(MAKE) ASAN=1
+
+ubsan:
+	$(MAKE) clean && $(MAKE) UBSAN=1
+
+.PHONY: all clean fclean re asan ubsan

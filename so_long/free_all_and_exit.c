@@ -6,91 +6,68 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 07:57:03 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/30 12:05:24 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/03 02:47:48 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	safe_destroy_image(void *mlx, void **img)
+void	free_enemy_counter(t_game *game)
 {
-	if (*img)
+	if (game->enemy_counter)
 	{
-		mlx_destroy_image(mlx, *img);
-		*img = NULL;
+		free(game->enemy_counter);
+		game->enemy_counter = NULL;
 	}
 }
 
-static void	free_player_sprites(t_game *game)
+void	free_maps(t_game *game)
 {
-	safe_destroy_image(game->mlx, (void **)&game->player.idle[DIR_UP]);
-	safe_destroy_image(game->mlx, (void **)&game->player.idle[DIR_DOWN]);
-	safe_destroy_image(game->mlx, (void **)&game->player.idle[DIR_LEFT]);
-	safe_destroy_image(game->mlx, (void **)&game->player.idle[DIR_RIGHT]);
-	safe_destroy_image(game->mlx, (void **)&game->player.move1[DIR_UP]);
-	safe_destroy_image(game->mlx, (void **)&game->player.move1[DIR_DOWN]);
-	safe_destroy_image(game->mlx, (void **)&game->player.move1[DIR_LEFT]);
-	safe_destroy_image(game->mlx, (void **)&game->player.move1[DIR_RIGHT]);
-	safe_destroy_image(game->mlx, (void **)&game->player.move2[DIR_UP]);
-	safe_destroy_image(game->mlx, (void **)&game->player.move2[DIR_DOWN]);
-	safe_destroy_image(game->mlx, (void **)&game->player.move2[DIR_LEFT]);
-	safe_destroy_image(game->mlx, (void **)&game->player.move2[DIR_RIGHT]);
+	if (game->map)
+	{
+		free_map(game->map);
+		game->map = NULL;
+	}
+	if (game->original_map)
+	{
+		free_map(game->original_map);
+		game->original_map = NULL;
+	}
 }
 
-void	free_collectible_sprites(t_game *game)
+void	free_map_name(t_game *game)
 {
-	safe_destroy_image(game->mlx, (void **)&game->collectible.frames[0]);
-	safe_destroy_image(game->mlx, (void **)&game->collectible.frames[1]);
-	safe_destroy_image(game->mlx, (void **)&game->collectible.frames[2]);
-	safe_destroy_image(game->mlx, (void **)&game->collectible.frames[3]);
-	safe_destroy_image(game->mlx, (void **)&game->collectible.frames[4]);
-	safe_destroy_image(game->mlx, (void **)&game->collectible.frames[5]);
-	safe_destroy_image(game->mlx, (void **)&game->collectible.frames[6]);
-	safe_destroy_image(game->mlx, (void **)&game->collectible.frames[7]);
-	safe_destroy_image(game->mlx, (void **)&game->collectible.frames[8]);
+	if (game->map_name)
+	{
+		free(game->map_name);
+		game->map_name = NULL;
+	}
 }
 
-static void	free_map_and_enemies_sprites(t_game *game)
+void	destroy_window_and_mlx(t_game *game)
 {
-	safe_destroy_image(game->mlx, (void **)&game->img_ground);
-	safe_destroy_image(game->mlx, (void **)&game->img_wall);
-	safe_destroy_image(game->mlx, (void **)&game->enemies.frames[0]);
-	safe_destroy_image(game->mlx, (void **)&game->enemies.frames[1]);
-	safe_destroy_image(game->mlx, (void **)&game->enemies.frames[2]);
-	safe_destroy_image(game->mlx, (void **)&game->exit.frames[0]);
-	safe_destroy_image(game->mlx, (void **)&game->exit.frames[1]);
-	safe_destroy_image(game->mlx, (void **)&game->exit.frames[2]);
-	safe_destroy_image(game->mlx, (void **)&game->exit.frames[3]);
-	safe_destroy_image(game->mlx, (void **)&game->exit.frames[4]);
-	safe_destroy_image(game->mlx, (void **)&game->exit.frames[5]);
-	safe_destroy_image(game->mlx, (void **)&game->exit.frames[6]);
-	safe_destroy_image(game->mlx, (void **)&game->exit.frames[7]);
-	safe_destroy_image(game->mlx, (void **)&game->exit.frames[8]);
-	safe_destroy_image(game->mlx, (void **)&game->exit.frames[9]);
-	safe_destroy_image(game->mlx, (void **)&game->exit.frames[10]);
-}
-
-void	free_all_and_exit(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	free_player_sprites(game);
-	free_collectible_sprites(game);
-	free_map_and_enemies_sprites(game);
 	if (game->win)
+	{
 		mlx_destroy_window(game->mlx, game->win);
+		game->win = NULL;
+	}
 	if (game->mlx)
 	{
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
+		game->mlx = NULL;
 	}
-	if (game->map)
-	{
-		while (game->map[i])
-			free(game->map[i++]);
-		free(game->map);
-	}
-	free(game->map_name);
+}
+
+// Entry point for cleaning up all resources and exiting
+void	free_all_and_exit(t_game *game)
+{
+	free_player_sprites(game);
+	free_collectible_sprites(game);
+	free_map_and_enemies_sprites(game);
+	free_enemy_counter(game);
+	free_maps(game);
+	free_map_name(game);
+	destroy_window_and_mlx(game);
 	exit(0);
 }

@@ -6,12 +6,13 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:40:54 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/22 11:25:54 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/03 01:49:19 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Check that file name ends with .ber and has a valid length
 int	is_valid_file_extension(const char *filename)
 {
 	int	len;
@@ -24,6 +25,7 @@ int	is_valid_file_extension(const char *filename)
 	return (ft_strncmp(filename + len - 4, ".ber", 4) == 0);
 }
 
+// Ensure map contains only allowed characters (0,1,P,E,C,X,Y)
 int	has_invalid_chars(char **map)
 {
 	int	y;

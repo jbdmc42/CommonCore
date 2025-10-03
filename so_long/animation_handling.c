@@ -6,12 +6,13 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 16:08:42 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/23 17:54:10 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/03 01:39:40 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Advance collectible and exit frame indices over time
 void	update_collectible_animation(t_game *game, int frame)
 {
 	static int	statec;
@@ -29,14 +30,15 @@ void	update_collectible_animation(t_game *game, int frame)
 		statec++;
 		if (statec >= 9)
 			statec = 0;
-		game->collectible.frames[0] = game->collectible.frames[statec];
+		game->collectible_frame = statec;
 		statee++;
 		if (statee >= 11)
 			statee = 0;
-		game->exit.frames[0] = game->exit.frames[statee];
+		game->exit_frame = statee;
 	}
 }
 
+// Advance enemy animation frame index on schedule
 void	update_enemy_animation(t_game *game, int frame)
 {
 	static int	current_frame = 0;
@@ -46,10 +48,11 @@ void	update_enemy_animation(t_game *game, int frame)
 		current_frame++;
 		if (current_frame >= 3)
 			current_frame = 0;
-		game->enemies.frames[0] = game->enemies.frames[current_frame];
+		game->enemy_frame = current_frame;
 	}
 }
 
+// Choose player sprite based on movement state and direction
 void	update_player_animation(t_game *game, int frame)
 {
 	int	dir;
@@ -72,6 +75,7 @@ void	update_player_animation(t_game *game, int frame)
 	}
 }
 
+// Tick animation system and render HUD and map
 void	update_animation(t_game *game)
 {
 	static int	frame;
@@ -90,6 +94,7 @@ void	update_animation(t_game *game)
 	}
 }
 
+// Wrapper used by MLX loop hook to pump animations
 int	update_animation_wrapper(void *param)
 {
 	t_game	*game;

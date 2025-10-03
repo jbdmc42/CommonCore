@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_third.c                                      :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 12:10:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/30 12:13:17 by jbdmc            ###   ########.fr       */
+/*   Created: 2025/08/31 14:31:00 by jbdmc             #+#    #+#             */
+/*   Updated: 2025/08/31 14:31:09 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "push_swap.h"
 
-int	count_enemies_on_map(t_game *game)
+long	ft_atol(const char *str)
 {
-	int	y;
-	int	x;
-	int	count;
+	int		sign;
+	long	res;
 
-	y = 0;
-	count = 0;
-	while (game->map[y])
+	sign = 1;
+	res = 0;
+	while ((*str >= 9 && *str <= 13) || *str == ' ')
+		str++;
+	if (*str == '+' || *str == '-')
 	{
-		x = 0;
-		while (game->map[y][x])
-		{
-			if (game->map[y][x] == 'X' || game->map[y][x] == 'Y')
-				count++;
-			x++;
-		}
-		y++;
+		if (*str == '-')
+			sign = -1;
+		str++;
 	}
-	return (count);
+	while (*str >= '0' && *str <= '9')
+	{
+		res = res * 10 + (*str - '0');
+		str++;
+	}
+	return (res * sign);
 }

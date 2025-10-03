@@ -6,12 +6,13 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:47:50 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/30 12:03:38 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/03 01:39:40 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Initialize core game state, mlx and player position
 static void	init_game_state(t_game *game)
 {
 	game->game_state = GAME_RUNNING;
@@ -33,6 +34,7 @@ static void	init_game_state(t_game *game)
 	}
 }
 
+// Load all sprite sheets required for the game
 static void	load_all_sprites(t_game *game)
 {
 	load_map_and_enemies_sprites(game);
@@ -41,15 +43,17 @@ static void	load_all_sprites(t_game *game)
 	load_exit_sprites(game);
 }
 
+// Register event hooks and enter the main loop
 static void	setup_hooks_and_loop(t_game *game)
 {
 	mlx_hook(game->win, KeyPress, KeyPressMask, handle_key, game);
-	mlx_hook(game->win, DestroyNotify, StructureNotifyMask, handle_close,
-		game);
+	mlx_hook(game->win, DestroyNotify, StructureNotifyMask,
+		handle_close_user, game);
 	mlx_loop_hook(game->mlx, update_animation_wrapper, game);
 	mlx_loop(game->mlx);
 }
 
+// Compute map size, open window, load assets and start loop
 static void	start_game(t_game *game)
 {
 	int	w;
@@ -74,6 +78,7 @@ static void	start_game(t_game *game)
 	setup_hooks_and_loop(game);
 }
 
+// Entry point: parse args, load map, validate and run
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -96,5 +101,4 @@ int	main(int argc, char **argv)
 		free_all_and_exit(&game);
 	game.elements.e_total_collectibles = game.elements.e_collectible;
 	start_game(&game);
-	return (0);
 }

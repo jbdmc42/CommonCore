@@ -6,12 +6,13 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:54:24 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/30 12:03:38 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/03 01:39:40 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Check if a move is allowed considering walls and exit rules
 int	is_move_valid(char tile, t_game *game)
 {
 	if (tile == '1')
@@ -25,6 +26,7 @@ int	is_move_valid(char tile, t_game *game)
 	return (1);
 }
 
+// Handle picking up a collectible and update counters
 void	handle_collectible(t_game *game, int x, int y)
 {
 	if (game->map[y][x] == 'C')
@@ -42,6 +44,7 @@ void	handle_collectible(t_game *game, int x, int y)
 	}
 }
 
+// Update the player's position and move counter
 void	update_player_position(t_game *game, int new_x, int new_y)
 {
 	game->map[game->player_y][game->player_x] = '0';
@@ -51,12 +54,14 @@ void	update_player_position(t_game *game, int new_x, int new_y)
 	game->move_counter++;
 }
 
+// Log the last movement performed with source and destination
 static void	log_player_move(t_game *game, int old_x, int old_y)
 {
 	ft_printf("Moved from [%d , %d] to [%d , %d] --> Move %i\n",
 		old_x, old_y, game->player_x, game->player_y, game->move_counter);
 }
 
+// Try to move player and handle win/blocked cases
 void	try_move_player(int dx, int dy, t_game *game)
 {
 	int		new_x;

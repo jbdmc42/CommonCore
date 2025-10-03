@@ -6,12 +6,13 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:45:12 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/22 11:24:46 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/03 01:39:40 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Map keycode to a movement attempt (WASD/arrows)
 void	check_correct_player_input(int keycode, t_game *game)
 {
 	if (keycode == XK_w || keycode == XK_Up)
@@ -24,6 +25,7 @@ void	check_correct_player_input(int keycode, t_game *game)
 		try_move_player(1, 0, game);
 }
 
+// Scan the map and set current player (x,y) position
 void	find_player_position(t_game *game)
 {
 	int	y;
@@ -49,6 +51,7 @@ void	find_player_position(t_game *game)
 	game->player_y = -1;
 }
 
+// Update facing direction based on target position
 void	update_player_direction(t_game *game, int new_x, int new_y)
 {
 	if (new_y < game->player_y)

@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_map.c                                         :+:      :+:    :+:   */
+/*   map_io.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/03 23:28:17 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/30 12:03:38 by jbdmc            ###   ########.fr       */
+/*   Created: 2025/10/03 02:55:10 by jbdmc             #+#    #+#             */
+/*   Updated: 2025/10/03 01:39:40 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Validate all lines length and ensure no empty lines exist
 static int	validate_lines(char **map)
 {
 	int	i;
@@ -38,6 +39,7 @@ static int	validate_lines(char **map)
 	return (1);
 }
 
+// Count lines in file using a simple 1-byte gnl
 static int	count_lines(int fd)
 {
 	int		count;
@@ -55,6 +57,7 @@ static int	count_lines(int fd)
 	return (count);
 }
 
+// Trim trailing newline from a line and return a duplicated clean string
 static char	*clean_line(char *line)
 {
 	int		len;
@@ -68,10 +71,7 @@ static char	*clean_line(char *line)
 		len++;
 	new = malloc(len + 1);
 	if (!new)
-	{
-		free(line);
-		return (NULL);
-	}
+		return (free(line), NULL);
 	i = 0;
 	while (i < len)
 	{
@@ -83,6 +83,7 @@ static char	*clean_line(char *line)
 	return (new);
 }
 
+// Read all lines into a newly allocated null-terminated char** map
 static char	**allocate_and_fill_map(int fd, int lines)
 {
 	char	**map;
@@ -102,6 +103,7 @@ static char	**allocate_and_fill_map(int fd, int lines)
 	return (map);
 }
 
+// Public: open file, read, validate lines and return the map
 char	**read_map(const char *filepath)
 {
 	int		fd;

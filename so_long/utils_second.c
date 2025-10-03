@@ -78,6 +78,9 @@ void	init_vars(t_game *game)
 	game->player_y = 0;
 	game->move_counter = 0;
 	game->move_delay = 0;
+	game->collectible_frame = 0;
+	game->enemy_frame = 0;
+	game->exit_frame = 0;
 	game->player.idle[DIR_UP] = NULL;
 	game->player.idle[DIR_DOWN] = NULL;
 	game->player.idle[DIR_LEFT] = NULL;

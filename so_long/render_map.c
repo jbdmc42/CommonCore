@@ -6,12 +6,13 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:06:44 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/22 11:33:58 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/03 01:39:40 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Draw a single tile at map (x,y) to the window
 void	render_tile(t_game *game, char tile, int x, int y)
 {
 	int	px;
@@ -24,7 +25,7 @@ void	render_tile(t_game *game, char tile, int x, int y)
 		mlx_put_image_to_window(game->mlx, game->win, game->img_wall, px, py);
 	else if (tile == 'E')
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->exit.frames[0], px, py);
+			game->exit.frames[game->exit_frame], px, py);
 	else if (tile == 'P')
 	{
 		game->player_x = x;
@@ -34,12 +35,13 @@ void	render_tile(t_game *game, char tile, int x, int y)
 	}
 	else if (tile == 'C')
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->collectible.frames[0], px, py);
+			game->collectible.frames[game->collectible_frame], px, py);
 	else if (tile == 'X' || tile == 'Y')
 		mlx_put_image_to_window(game->mlx, game->win,
-			game->enemies.frames[0], px, py);
+			game->enemies.frames[game->enemy_frame], px, py);
 }
 
+// Draw the full map by iterating through all tiles
 void	render_map(t_game *game)
 {
 	int	y;

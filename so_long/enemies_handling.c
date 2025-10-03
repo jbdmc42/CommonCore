@@ -6,12 +6,13 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:54:12 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/30 12:13:17 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/03 01:49:19 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Update enemies movement periodically based on frame counter
 void	update_enemies(t_game *game, int frame)
 {
 	int	i;
@@ -26,6 +27,7 @@ void	update_enemies(t_game *game, int frame)
 	}
 }
 
+// Scan the map and store each enemy's initial movement data
 void	define_enemy_movement(t_game *game, int count)
 {
 	int	y;
@@ -51,6 +53,7 @@ void	define_enemy_movement(t_game *game, int count)
 	}
 }
 
+// Allocate enemy counters and initialize their paths
 void	init_enemies(t_game *game)
 {
 	int	count;
@@ -72,6 +75,7 @@ void	init_enemies(t_game *game)
 		game->enemy_counter = NULL;
 }
 
+// Validate a target tile for enemy movement; close on player hit
 static int	is_valid_enemy_move(t_game *game, char tile)
 {
 	if (tile == 'P')
@@ -84,6 +88,7 @@ static int	is_valid_enemy_move(t_game *game, char tile)
 	return (0);
 }
 
+// Move a single enemy along its axis, bouncing on obstacles
 void	move_enemy(t_game *game, t_enemy_counter *enemy_counter)
 {
 	int		new_x;

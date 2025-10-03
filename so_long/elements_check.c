@@ -6,12 +6,13 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:48:17 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/23 16:24:50 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/03 01:49:19 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Count P, E and C occurrences in the map and store in game->elements
 static void	count_map_elements(char **map, t_game *game)
 {
 	int	y;
@@ -35,6 +36,7 @@ static void	count_map_elements(char **map, t_game *game)
 	}
 }
 
+// Ensure exactly 1 P, 1 E and at least 1 C exist on the map
 int	is_map_elements_valid(char **map, t_game *game)
 {
 	game->elements.e_player = 0;

@@ -6,12 +6,13 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 14:14:45 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/23 14:32:41 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/03 01:39:40 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Build "Player Position [x , y]" string
 char	*prepare_player_position_str(t_game *game)
 {
 	char	*x_str;
@@ -33,6 +34,7 @@ char	*prepare_player_position_str(t_game *game)
 	return (final_str);
 }
 
+// Draw current level and player position on screen
 void	render_hud_level_player_pos(t_game *game)
 {
 	char	*level_str;
@@ -49,6 +51,7 @@ void	render_hud_level_player_pos(t_game *game)
 	free(tmp);
 }
 
+// Build "Collectibles: current/total" string
 static char	*get_collectibles_str(t_game *game)
 {
 	char	*collected;
@@ -68,6 +71,7 @@ static char	*get_collectibles_str(t_game *game)
 	return (collect_str);
 }
 
+// Build final "Collectibles: x/y" string
 char	*prepare_collect_str(t_game *game)
 {
 	char	*tmp;
@@ -79,6 +83,7 @@ char	*prepare_collect_str(t_game *game)
 	return (tmp);
 }
 
+// Draw collectibles and move counter on screen
 void	render_hud_moves_and_collectibles(t_game *game)
 {
 	char	*str;

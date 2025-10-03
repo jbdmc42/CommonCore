@@ -6,12 +6,13 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:47:17 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/23 14:09:04 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/03 01:39:40 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Create two copies of the map: one for flood fill and one backup
 static int	create_map_copies(t_game *game, char ***copy, char ***backup)
 {
 	*copy = copy_map(game->map);
@@ -25,6 +26,7 @@ static int	create_map_copies(t_game *game, char ***copy, char ***backup)
 	return (1);
 }
 
+// Validate rectangular shape and surrounding walls
 int	is_map_rectangular(char **map)
 {
 	size_t	width;
@@ -70,6 +72,7 @@ int	validate_map_basic(char **map)
 	return (1);
 }
 
+// Full validation pipeline: chars, geometry, reachability
 int	validate_map(t_game *game)
 {
 	char	**map_copy;
