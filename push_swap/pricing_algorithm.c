@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pricing_algorithm.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 15:47:03 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/03 16:39:48 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/06 08:38:01 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ t_cost	calculate_cost(t_stack *a, t_stack *b, t_node *node)
 
 static void	find_min_max(t_stack *a, t_node **min_node, t_node **max_node)
 {
-	t_node *cur;
-	
+	t_node	*cur;
+
 	cur = a->top;
 	*min_node = cur;
 	*max_node = cur;
@@ -66,15 +66,15 @@ int	find_pos_in_a(t_stack *a, int value)
 
 	find_min_max(a, &min_node, &max_node);
 	if (value < min_node->value || value > max_node->value)
-		return index_of_min(a);
+		return (index_of_min(a));
 	cur = a->top;
 	i = 0;
 	while (cur && cur->next)
 	{
 		if (cur->value < value && value < cur->next->value)
-			return i + 1;
+			return (i + 1);
 		cur = cur->next;
 		i++;
 	}
-	return 0;
+	return (0);
 }

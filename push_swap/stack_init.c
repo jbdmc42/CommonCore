@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:35:37 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/08/31 13:13:45 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/06 08:43:47 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	stack_add_bottom(t_stack *stack, t_node *new)
 t_node	*new_node(int value)
 {
 	t_node	*node;
-	
+
 	node = malloc(sizeof(t_node));
 	if (!node)
 		return (NULL);

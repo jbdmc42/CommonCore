@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sorting_algorithm.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 12:24:47 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/03 16:38:27 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/06 08:38:40 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	index_of_node(t_stack *b, t_node *node)
 {
-	t_node *cur;
+	t_node	*cur;
 	int		i;
 
 	cur = b->top;
@@ -81,7 +81,7 @@ t_node	*node_at(t_stack *s, int index)
 {
 	t_node	*cur;
 	int		i;
-	
+
 	cur = s->top;
 	i = 0;
 	while (cur && i < index)

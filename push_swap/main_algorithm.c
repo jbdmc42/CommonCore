@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_algorithm.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 15:59:23 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/03 16:29:22 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/06 08:37:03 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	min_value(t_stack *a)
 {
-	t_node *cur;
+	t_node	*cur;
 	int		min;
 
 	if (!a || a->size == 0)

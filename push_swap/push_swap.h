@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 17:18:21 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/03 16:38:24 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/06 08:34:39 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	free_tokens(char **tokens);
 
 // FT_PRINT
 void	print_error(void);
-void	print_stack(t_stack *stack);
 
 // MAIN_ALGORITHM
 void	sort_stack(t_stack *a, t_stack *b);

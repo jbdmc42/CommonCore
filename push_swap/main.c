@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 17:16:39 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/03 16:01:50 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/06 08:31:57 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int	main(int argc, char **argv)
 		print_error();
 	if (!is_sorted(&a))
 		sort_stack(&a, &b);
-	print_stack(&a);
 	free_stack(&a);
 	free_stack(&b);
 	return (0);

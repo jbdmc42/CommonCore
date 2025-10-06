@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   special_cases.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:03:01 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/01 12:14:21 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/06 08:42:49 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	push_min_to_b(t_stack *a, t_stack *b, t_node *cur)
 {
-	int		min;
-	int		pos;
-	int		i;
+	int	min;
+	int	pos;
+	int	i;
 
 	cur = a->top;
 	min = cur->value;
@@ -32,7 +32,7 @@ static void	push_min_to_b(t_stack *a, t_stack *b, t_node *cur)
 		cur = cur->next;
 		i++;
 	}
-	if	(pos <= a->size / 2)
+	if (pos <= a->size / 2)
 		while (a->top->value != min)
 			ra(a);
 	else
@@ -43,29 +43,29 @@ static void	push_min_to_b(t_stack *a, t_stack *b, t_node *cur)
 
 void	sort_three(t_stack *a)
 {
-	int	A;
-	int	B;
-	int	C;
+	int	aa;
+	int	bb;
+	int	cc;
 
-	A = a->top->value;
-	B = a->top->next->value;
-	C = a->bot->value;
-	if (A > B && B < C && A < C)
-        sa(a);
-    else if (A > B && B > C)
-    {
-        sa(a);
-        rra(a);
-    }
-    else if (A > B && B < C && A > C)
-        ra(a);
-    else if (A < B && B > C && A < C)
-    {
-        sa(a);
-        ra(a);
-    }
-    else if (A < B && B > C && A > C)
-        rra(a);
+	aa = a->top->value;
+	bb = a->top->next->value;
+	cc = a->bot->value;
+	if (aa > bb && bb < cc && aa < cc)
+		sa(a);
+	else if (aa > bb && bb > cc)
+	{
+		sa(a);
+		rra(a);
+	}
+	else if (aa > bb && bb < cc && aa > cc)
+		ra(a);
+	else if (aa < bb && bb > cc && aa < cc)
+	{
+		sa(a);
+		ra(a);
+	}
+	else if (aa < bb && bb > cc && aa > cc)
+		rra(a);
 }
 
 void	sort_five(t_stack *a, t_stack *b)
