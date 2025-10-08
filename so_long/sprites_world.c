@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_world.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 03:36:20 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/03 02:41:02 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/08 14:34:30 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ void	load_exit_sprites(t_game *game)
 {
 	char	*files[11];
 
-	files[0] = "a/1.xpm";
-	files[1] = "a/2.xpm";
-	files[2] = "a/3.xpm";
-	files[3] = "a/4.xpm";
-	files[4] = "a/5.xpm";
-	files[5] = "a/6.xpm";
-	files[6] = "a/7.xpm";
-	files[7] = "a/8.xpm";
-	files[8] = "a/9.xpm";
-	files[9] = "a/10.xpm";
-	files[10] = "a/11.xpm";
+	files[0] = "textures/exit/KeyFrame1.xpm";
+	files[1] = "textures/exit/KeyFrame2.xpm";
+	files[2] = "textures/exit/KeyFrame3.xpm";
+	files[3] = "textures/exit/KeyFrame4.xpm";
+	files[4] = "textures/exit/KeyFrame5.xpm";
+	files[5] = "textures/exit/KeyFrame6.xpm";
+	files[6] = "textures/exit/KeyFrame7.xpm";
+	files[7] = "textures/exit/KeyFrame8.xpm";
+	files[8] = "textures/exit/KeyFrame9.xpm";
+	files[9] = "textures/exit/KeyFrame10.xpm";
+	files[10] = "textures/exit/KeyFrame11.xpm";
 	if (!load_frames(game, game->exit.frames, files, 11))
 		exit(1);
 }
@@ -81,15 +81,15 @@ void	load_collectible_sprites(t_game *game)
 {
 	char	*files[9];
 
-	files[0] = "a/collectible/Collectible1.xpm";
-	files[1] = "a/collectible/Collectible2.xpm";
-	files[2] = "a/collectible/Collectible3.xpm";
-	files[3] = "a/collectible/Collectible4.xpm";
-	files[4] = "a/collectible/Collectible5.xpm";
-	files[5] = "a/collectible/Collectible6.xpm";
-	files[6] = "a/collectible/Collectible7.xpm";
-	files[7] = "a/collectible/Collectible8.xpm";
-	files[8] = "a/collectible/Collectible9.xpm";
+	files[0] = "textures/collectible/Collectible1.xpm";
+	files[1] = "textures/collectible/Collectible2.xpm";
+	files[2] = "textures/collectible/Collectible3.xpm";
+	files[3] = "textures/collectible/Collectible4.xpm";
+	files[4] = "textures/collectible/Collectible5.xpm";
+	files[5] = "textures/collectible/Collectible6.xpm";
+	files[6] = "textures/collectible/Collectible7.xpm";
+	files[7] = "textures/collectible/Collectible8.xpm";
+	files[8] = "textures/collectible/Collectible9.xpm";
 	if (!load_frames(game, game->collectible.frames, files, 9))
 		exit(1);
 }

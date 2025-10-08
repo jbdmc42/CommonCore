@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_hud.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 14:14:45 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/03 01:39:40 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/08 14:42:20 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,11 @@ char	*prepare_player_position_str(t_game *game)
 // Draw current level and player position on screen
 void	render_hud_level_player_pos(t_game *game)
 {
-	char	*level_str;
 	char	*pos_str;
-	char	*tmp;
 
-	tmp = ft_strjoin("Level [", game->map_name);
-	level_str = ft_strjoin(tmp, "]");
 	pos_str = prepare_player_position_str(game);
-	mlx_string_put(game->mlx, game->win, 10, 20, 0x00FF00, level_str);
-	mlx_string_put(game->mlx, game->win, 100, 20, 0x00FF00, pos_str);
-	free(level_str);
+	mlx_string_put(game->mlx, game->win, 10, 20, 0x00FF00, pos_str);
 	free(pos_str);
-	free(tmp);
 }
 
 // Build "Collectibles: current/total" string
@@ -89,9 +82,9 @@ void	render_hud_moves_and_collectibles(t_game *game)
 	char	*str;
 
 	str = prepare_collect_str(game);
-	mlx_string_put(game->mlx, game->win, 270, 20, 0x00FF00, str);
+	mlx_string_put(game->mlx, game->win, 180, 20, 0x00FF00, str);
 	free(str);
 	str = prepare_moves_str(game);
-	mlx_string_put(game->mlx, game->win, 405, 20, 0x00FF00, str);
+	mlx_string_put(game->mlx, game->win, 315, 20, 0x00FF00, str);
 	free(str);
 }

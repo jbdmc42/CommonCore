@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:47:17 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/03 01:39:40 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/08 14:52:32 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	is_map_rectangular(char **map)
 	if (!map || !map[0])
 		return (0);
 	width = ft_strlen(map[0]);
-	if (width < 13)
+	if (width < 11)
 	{
-		ft_printf("Error\n \xE2\x88\x9F map is less than 13 tiles long\n");
+		ft_printf("Error\n \xE2\x88\x9F map is less than 11 tiles long\n");
 		return (0);
 	}
 	height = 0;

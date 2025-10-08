@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 03:35:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/03 02:09:35 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/08 14:22:17 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 // Fill arrays with player sprite file paths
 static void	set_player_files(char **idle, char **move1, char **move2)
 {
-	idle[0] = "a/player/Idle/Back/KnightIdleBack.xpm";
-	idle[1] = "a/player/Idle/Front/KnightIdleFront.xpm";
-	idle[2] = "a/player/Idle/Left/KnightIdleLeft.xpm";
-	idle[3] = "a/player/Idle/Right/KnightIdleRight.xpm";
-	move1[0] = "a/player/Moving/Back/KnightMovingBack1.xpm";
-	move1[1] = "a/player/Moving/Front/KnightMovingFront1.xpm";
-	move1[2] = "a/player/Moving/Left/KnightMovingLeft1.xpm";
-	move1[3] = "a/player/Moving/Right/KnightMovingRight1.xpm";
-	move2[0] = "a/player/Moving/Back/KnightMovingBack2.xpm";
-	move2[1] = "a/player/Moving/Front/KnightMovingFront2.xpm";
-	move2[2] = "a/player/Moving/Left/KnightMovingLeft2.xpm";
-	move2[3] = "a/player/Moving/Right/KnightMovingRight2.xpm";
+	idle[0] = "textures/player/Idle/Back/KnightIdleBack.xpm";
+	idle[1] = "textures/player/Idle/Front/KnightIdleFront.xpm";
+	idle[2] = "textures/player/Idle/Left/KnightIdleLeft.xpm";
+	idle[3] = "textures/player/Idle/Right/KnightIdleRight.xpm";
+	move1[0] = "textures/player/Moving/Back/KnightMovingBack1.xpm";
+	move1[1] = "textures/player/Moving/Front/KnightMovingFront1.xpm";
+	move1[2] = "textures/player/Moving/Left/KnightMovingLeft1.xpm";
+	move1[3] = "textures/player/Moving/Right/KnightMovingRight1.xpm";
+	move2[0] = "textures/player/Moving/Back/KnightMovingBack2.xpm";
+	move2[1] = "textures/player/Moving/Front/KnightMovingFront2.xpm";
+	move2[2] = "textures/player/Moving/Left/KnightMovingLeft2.xpm";
+	move2[3] = "textures/player/Moving/Right/KnightMovingRight2.xpm";
 }
 
 // Load an array of 4 player sprites for the given files

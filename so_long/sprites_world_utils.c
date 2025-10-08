@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites_world_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 06:25:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/03 02:46:40 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/08 14:22:17 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 // Set file paths for world (ground, wall, enemies)
 void	set_world_files(char **files)
 {
-	files[0] = "a/ground/Ground.xpm";
-	files[1] = "a/walls/Wall.xpm";
-	files[2] = "a/enemy/Enemy1.xpm";
-	files[3] = "a/enemy/Enemy2.xpm";
-	files[4] = "a/enemy/Enemy3.xpm";
+	files[0] = "textures/ground/Ground.xpm";
+	files[1] = "textures/walls/Wall.xpm";
+	files[2] = "textures/enemy/Enemy1.xpm";
+	files[3] = "textures/enemy/Enemy2.xpm";
+	files[4] = "textures/enemy/Enemy3.xpm";
 }
 
 // Load the 3 enemy frames from an array of 3 file paths
