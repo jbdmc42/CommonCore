@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:27:59 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/03 03:04:48 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/08 12:25:29 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct s_game
 	int				enemy_num;			// enemies on the level
 	char			*map_name;			// map name (level)
 	int				move_delay;
+	int				player_on_exit;
 }	t_game;
 
 // animation_handling.c:
@@ -163,7 +164,7 @@ void	update_player_direction(t_game *game, int new_x, int new_y);
 void	try_move_player(int dx, int dy, t_game *game);
 void	update_player_position(t_game *game, int new_x, int new_y);
 void	handle_collectible(t_game *game, int x, int y);
-int		is_move_valid(char tile, t_game *game);
+int		is_move_valid(char tile);
 
 // pre_game_checks.c:
 int		is_valid_file_extension(const char *filename);

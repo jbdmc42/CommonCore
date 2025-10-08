@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 11:37:11 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/09/30 11:19:33 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/08 12:19:52 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	init_vars(t_game *game)
 	game->player_sprite = NULL;
 	game->frame_counter = 0;
 	game->anim_state = 0;
-	game->moving = 0;
 	game->dir = DIR_DOWN;
 	game->player_x = 0;
 	game->player_y = 0;
@@ -93,6 +92,7 @@ void	init_vars(t_game *game)
 	game->player.move2[DIR_DOWN] = NULL;
 	game->player.move2[DIR_LEFT] = NULL;
 	game->player.move2[DIR_RIGHT] = NULL;
+	game->player_on_exit = 0;
 	init_vars_two(game);
 }
 

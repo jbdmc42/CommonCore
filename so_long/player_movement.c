@@ -6,23 +6,17 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 15:54:24 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/03 01:39:40 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/08 12:21:54 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 // Check if a move is allowed considering walls and exit rules
-int	is_move_valid(char tile, t_game *game)
+int	is_move_valid(char tile)
 {
 	if (tile == '1')
 		return (0);
-	if (tile == 'E' && game->elements.e_collectible > 0)
-	{
-		ft_printf("You can only finish the level after grabbing all the ");
-		ft_printf("collectibles on the map!\n");
-		return (0);
-	}
 	return (1);
 }
 
@@ -47,9 +41,19 @@ void	handle_collectible(t_game *game, int x, int y)
 // Update the player's position and move counter
 void	update_player_position(t_game *game, int new_x, int new_y)
 {
-	game->map[game->player_y][game->player_x] = '0';
+	char	dest;
+
+	dest = game->map[new_y][new_x];
+	if (game->player_on_exit)
+		game->map[game->player_y][game->player_x] = 'E';
+	else
+		game->map[game->player_y][game->player_x] = '0';
 	game->player_x = new_x;
 	game->player_y = new_y;
+	if (dest == 'E' && game->elements.e_collectible > 0)
+		game->player_on_exit = 1;
+	else
+		game->player_on_exit = 0;
 	game->map[new_y][new_x] = 'P';
 	game->move_counter++;
 }
@@ -71,7 +75,7 @@ void	try_move_player(int dx, int dy, t_game *game)
 	new_x = game->player_x + dx;
 	new_y = game->player_y + dy;
 	tile = game->map[new_y][new_x];
-	if (!is_move_valid(tile, game))
+	if (!is_move_valid(tile))
 	{
 		game->moving = 0;
 		return ;

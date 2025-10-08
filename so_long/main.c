@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:47:50 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/03 01:39:40 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/08 12:09:15 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 static void	init_game_state(t_game *game)
 {
 	game->game_state = GAME_RUNNING;
+	game->moving = 0;
 	init_vars(game);
 	init_enemies(game);
 	game->mlx = mlx_init();

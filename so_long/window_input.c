@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 00:45:00 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/03 01:56:18 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/08 12:19:52 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	reset_vars(t_game *game)
 	game->move_counter = 0;
 	game->elements.e_collectible = game->elements.e_total_collectibles;
 	game->move_delay = 0;
+	game->player_on_exit = 0;
 }
 
 // Reset game state to original map, reinit enemies and re-render
