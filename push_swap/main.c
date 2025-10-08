@@ -6,7 +6,7 @@
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 17:16:39 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/06 08:31:57 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/10/08 15:40:33 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,10 @@ int	main(int argc, char **argv)
 	stack_init(&a);
 	stack_init(&b);
 	if (!parse_and_fill_stack(argc, argv, &a))
+	{
+		free_stack(&a);
 		print_error();
+	}
 	if (!is_sorted(&a))
 		sort_stack(&a, &b);
 	free_stack(&a);

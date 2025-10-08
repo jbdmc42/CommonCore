@@ -3,22 +3,8 @@
 # **************************************************************************** #
 
 NAME		= so_long
-CC			= gcc
+CC		= gcc
 CFLAGS		= -Wall -Wextra -Werror
-#CFLAGS		= -Wall -Wextra -Werror	-fsanitize=leak -g -O1
-
-# Optional linker flags (populated by sanitizer modes)
-LDFLAGS		=
-
-# Enable sanitizers with: `make clean && make ASAN=1` or `make UBSAN=1`
-ifeq ($(ASAN),1)
-CFLAGS		+= -fsanitize=address -fno-omit-frame-pointer -g -O1
-LDFLAGS		+= -fsanitize=address
-endif
-ifeq ($(UBSAN),1)
-CFLAGS		+= -fsanitize=undefined -g -O1
-LDFLAGS		+= -fsanitize=undefined
-endif
 
 MLX_DIR		= minilibx
 PRINTF_DIR	= ft_printf
@@ -66,7 +52,7 @@ $(PRINTF_A):
 	@$(MAKE) -C $(PRINTF_DIR)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(MLX_LIB) $(PRINTF_A) $(LDFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(MLX_LIB) $(PRINTF_A) -o $(NAME)
 
 %.o: %.c so_long.h
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
@@ -82,11 +68,4 @@ fclean: clean
 
 re: fclean all
 
-# Convenience targets
-asan:
-	$(MAKE) clean && $(MAKE) ASAN=1
-
-ubsan:
-	$(MAKE) clean && $(MAKE) UBSAN=1
-
-.PHONY: all clean fclean re asan ubsan
+.PHONY: all clean fclean re
