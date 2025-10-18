@@ -3,11 +3,12 @@
 # **************************************************************************** #
 
 NAME		= so_long
-CC		= gcc
+CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror
 
 MLX_DIR		= minilibx
 PRINTF_DIR	= ft_printf
+BONUS_DIR	= bonus
 
 MLX_LIB		= -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lbsd
 PRINTF_A	= $(PRINTF_DIR)/libftprintf.a
@@ -41,7 +42,11 @@ SRCS		= main.c \
 			enemies_utils.c \
 			path_utils.c \
 			key_input.c
+
+BONUS_SRCS	= $(addprefix $(BONUS_DIR)/, $(SRCS:.c=_bonus.c))
+
 OBJS		= $(SRCS:.c=.o)
+BONUS_OBJS	= $(BONUS_SRCS:.c=.o)
 
 all: $(MLX_DIR)/libmlx.a $(PRINTF_A) $(NAME)
 
@@ -58,14 +63,20 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJS) $(BONUS_OBJS)
 	@$(MAKE) -C $(MLX_DIR) clean
 	@$(MAKE) -C $(PRINTF_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(NAME_BONUS)
 	@$(MAKE) -C $(PRINTF_DIR) fclean
+
+bonus: $(MLX_DIR)/libmlx.a $(PRINTF_A) $(BONUS_OBJS)
+	$(CC) $(CFLAGS) $(BONUS_OBJS) $(INCLUDES) $(MLX_LIB) $(PRINTF_A) -o $(NAME)
+
+$(BONUS_DIR)/%.o: $(BONUS_DIR)/%.c so_long_bonus.h
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

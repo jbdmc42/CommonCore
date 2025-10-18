@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   window_and_input_handling_bonus.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 10:15:45 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/16 15:03:58 by jbdmc            ###   ########.fr       */
+/*   Created: 2025/07/09 15:52:15 by jbdmc             #+#    #+#             */
+/*   Updated: 2025/10/16 14:41:07 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "so_long_bonus.h"
 
-void	reset_server(t_server *server)
+// Print friendly message and then perform normal close
+int	handle_close_user(void *param)
 {
-	server->c = 0;
-	server->bit = 0;
+	ft_printf("Game closed successfully by player input.\n");
+	return (handle_close(param));
 }
 
-void	flush_buffer(char *buffer, int *buffer_index, char c)
+// Free all resources and exit the program
+int	handle_close(void *param)
 {
-	buffer[*buffer_index] = '\0';
-	ft_printf("%s", buffer);
-	*buffer_index = 0;
-	buffer[(*buffer_index)++] = c;
+	t_game	*game;
+
+	game = (t_game *)param;
+	free_all_and_exit(game);
+	return (0);
 }
