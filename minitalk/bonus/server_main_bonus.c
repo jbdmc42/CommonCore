@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 19:12:26 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/16 17:56:38 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/21 16:35:41 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,39 +26,39 @@ void	check_client(pid_t client_pid)
 		g_server.client_pid = client_pid;
 }
 
-int	init_server(t_server *server)
+void	process_bit(int sig)
 {
-	server->c = 0;
-	server->bit = 0;
-	server->client_pid = 0;
-	return (getpid());
+	g_server.c = (g_server.c << 1) | (sig == SIGUSR2);
+	g_server.bit++;
+	kill(g_server.client_pid, SIGUSR2);
 }
 
-void	signal_handler(int sig, siginfo_t *info, void *context)
+void	process_char(void)
 {
 	static char	buffer[65536];
 	static int	buffer_index;
 
+	if (g_server.c == '\0')
+	{
+		buffer[buffer_index] = '\0';
+		ft_printf("%s\n", buffer);
+		kill(g_server.client_pid, SIGUSR1);
+		buffer_index = 0;
+	}
+	else if (buffer_index < 65535)
+		buffer[buffer_index++] = g_server.c;
+	else
+		flush_buffer(buffer, &buffer_index, g_server.c);
+	reset_server(&g_server);
+}
+
+void	signal_handler(int sig, siginfo_t *info, void *context)
+{
 	(void)context;
 	check_client(info->si_pid);
-	g_server.c = (g_server.c << 1) | (sig == SIGUSR2);
-	g_server.bit++;
-	kill(g_server.client_pid, SIGUSR2);
+	process_bit(sig);
 	if (g_server.bit == 8)
-	{
-		if (g_server.c == '\0')
-		{
-			buffer[buffer_index] = '\0';
-			ft_printf("%s\n", buffer);
-			kill(g_server.client_pid, SIGUSR1);
-			buffer_index = 0;
-		}
-		else if (buffer_index < 65535)
-			buffer[buffer_index++] = g_server.c;
-		else
-			flush_buffer(buffer, &buffer_index, g_server.c);
-		reset_server(&g_server);
-	}
+		process_char();
 }
 
 int	main(void)

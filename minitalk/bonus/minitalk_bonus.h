@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   minitalk_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 19:13:15 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/16 15:03:55 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/21 16:30:43 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
 
 # define _POSIX_C_SOURCE 200809L
 

@@ -22,7 +22,7 @@ INCLUDES	= -I$(INC_DIR) $(PRINTF_INC)
 SRCS_SERVER	= $(SRC_DIR)/server_main.c \
 			  $(SRC_DIR)/utils.c
 
-SRCS_CLIENT	= $(SRC_DIR)/client_main.c
+SRCS_CLIENT	= $(SRC_DIR)/client_main.c \
 
 BONUS_SRCS_SERVER = $(addprefix $(BONUS_DIR)/, $(notdir $(SRCS_SERVER:.c=_bonus.c)))
 BONUS_SRCS_CLIENT = $(addprefix $(BONUS_DIR)/, $(notdir $(SRCS_CLIENT:.c=_bonus.c)))
