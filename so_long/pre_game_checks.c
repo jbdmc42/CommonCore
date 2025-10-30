@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_game_checks.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 11:40:54 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/08 15:02:50 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/10/30 10:07:39 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ int	has_invalid_chars(char **map)
 		{
 			if (map[y][x] != '0' && map[y][x] != '1' &&
 				map[y][x] != 'P' && map[y][x] != 'E' &&
-				map[y][x] != 'C' && map[y][x] != 'X' &&
-				map[y][x] != 'Y')
+				map[y][x] != 'C' && map[y][x])
 			{
 				ft_printf("Error\n \xE2\x88\x9F");
 				ft_printf(" map has invalid characters: '%c'\n", map[y][x]);

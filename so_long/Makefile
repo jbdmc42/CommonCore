@@ -3,7 +3,7 @@
 # **************************************************************************** #
 
 NAME		= so_long
-CC			= gcc
+CC			= cc
 CFLAGS		= -Wall -Wextra -Werror
 
 MLX_DIR		= minilibx
