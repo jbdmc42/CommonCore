@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server_main_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 19:12:26 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/21 16:35:41 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/23 15:06:27 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	process_bit(int sig)
 {
 	g_server.c = (g_server.c << 1) | (sig == SIGUSR2);
 	g_server.bit++;
-	kill(g_server.client_pid, SIGUSR2);
 }
 
 void	process_char(void)
@@ -59,6 +58,8 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 	process_bit(sig);
 	if (g_server.bit == 8)
 		process_char();
+	if (g_server.client_pid != 0)
+		kill(g_server.client_pid, SIGUSR2);
 }
 
 int	main(void)

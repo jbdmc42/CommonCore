@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   client_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 19:13:49 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/21 16:28:44 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/10/23 15:05:09 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ack_handler(int sig)
 static void	message_received_handler(int sig)
 {
 	(void)sig;
-	ft_printf("\nMessage received by the server!\n");
+	g_ack = 1;
 }
 
 void	send_char(pid_t server_pid, unsigned char c)

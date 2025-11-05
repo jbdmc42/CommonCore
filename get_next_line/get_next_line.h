@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/04 19:13:15 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/10/21 18:09:36 by joaobarb         ###   ########.fr       */
+/*   Created: 2025/05/06 11:53:22 by joaobarb          #+#    #+#             */
+/*   Updated: 2025/06/17 13:44:30 by joaobarb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef GET_NEXT_LINE_H
 
-# define _POSIX_C_SOURCE 200809L
+# define GET_NEXT_LINE_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 # include <unistd.h>
-# include <signal.h>
 # include <stdlib.h>
-# include <sys/types.h>
-# include "ft_printf.h"
 
-typedef struct s_server
-{
-	unsigned char	c;
-	int				bit;
-	pid_t			client_pid;
-}	t_server;
-
-extern t_server	g_server;
-
-void	reset_server(t_server *server);
-void	flush_buffer(char *buffer, int *buffer_index, char c);
+char	*get_next_line(int fd);
+char	*gnl_strjoin(char *s1, char *s2);
+char	*gnl_strchr(char *s, int c);
+char	*gnl_strdup(char *s);
+char	*gnl_substr(char *s, int start, int len);
+int		gnl_strlen(char *s);
 
 #endif
