@@ -6,38 +6,73 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:25:30 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/11/12 09:46:05 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/11/17 07:07:31 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_philo(void)
+static int	ft_strcmp(const char *s1, const char *s2)
 {
-	
+	int	i;
+
+	i = 0;
+	while ((s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i]))
+	{
+		i++;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+void	safe_print(t_philo *ph, const char *msg)
+{
+	long long	timestamp;
+
+	pthread_mutex_lock(&ph->data->print_mutex);
+	if (!is_simulation_end(ph->data) || (msg && ft_strcmp(msg, "died") == 0))
+	{
+		timestamp = get_time_ms() - ph->data->start_time;
+		printf("%lld | Philosopher %d %s\n", timestamp, ph->id, msg);
+	}
+	pthread_mutex_unlock(&ph->data->print_mutex);
+}
+
+static void	cleanup(t_data *data)			// destroy the created mutexes and free the allocated arrays
+{
+	int	i;
+
+	i = 0;
+	while (i < data->num_philo)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&data->print_mutex);
+	pthread_mutex_destroy(&data->end_mutex);
+	free(data->forks);
+	free(data->philos);
 }
 
 int	main(int argc, char **argv)
 {
-	int	cycle;
-	
-	if (argc < 5 || argc > 6)
+	t_data data;
+
+	if (argc < 5 || argc > 6)				// verify incorrect argument count & display error message
 	{
 		write(1, "Invalid argument count. Usage: ./philo <number_of_", 50);
 		write(1, "philosophers> <time_to_die> <time_to_eat> <time_to_s", 52);
 		write(1, "leep> <[number_of_times_each_philosopher_must_eat]>\n", 52);
-	cycle = 0;
-	if (argc == 6)
-	{
-		cycle = ft_atoi(argv[6]);
-		while (cycle > 0)
-		{
-			ft_philo();
-			cycle--;
-		}
-		return (0);
+		return (1);
 	}
-	while (1)
-		ft_philo();
+	if (init_data(&data, argc, argv) != 0)	// init global data struct with a protection
+		return (1);
+	if (init_philo(&data) != 0)				// init philosophers data struct with a protection (aka init philo array)
+		return (1);
+	if (create_threads(&data) != 0)			// create the philosophers threads
+		return (1);
+	monitor(&data);							// function that will detect deaths and meals eaten
+	set_simulation_end(&data);				// function that will set the simulation end
+	join_threads(&data);					// function that will wait for all threads to end
+	cleanup(&data);							// function that will free all the memory and destroy the mutexes
 	return (0);
 }

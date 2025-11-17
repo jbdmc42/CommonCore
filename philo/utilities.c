@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utilies.c                                          :+:      :+:    :+:   */
+/*   utilities.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:40:14 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/11/12 09:40:39 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/11/17 06:15:34 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,21 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (res * val);
+}
+
+void	set_simulation_end(t_data *data)
+{
+	pthread_mutex_lock(&data->end_mutex);
+	data->simulation_end = 1;
+	pthread_mutex_unlock(&data->end_mutex);
+}
+
+int	is_simulation_end(t_data *data)
+{
+	int	val;
+	
+	pthread_mutex_lock(&data->end_mutex);
+	val = data->simulation_end;
+	pthread_mutex_unlock(&data->end_mutex);
+	return (val);
 }

@@ -9,7 +9,9 @@ CFLAGS		= -Wall -Wextra -Werror
 INCLUDES	= -I.
 
 SRCS		= main.c \
+			init.c \
 			philo_actions.c \
+			threads.c \
 			utilities.c \
 
 OBJS		= $(SRCS:.c=.o)
