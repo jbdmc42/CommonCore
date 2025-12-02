@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:25:30 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/11/17 07:07:31 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/12/02 11:23:56 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	safe_print(t_philo *ph, const char *msg)
 	if (!is_simulation_end(ph->data) || (msg && ft_strcmp(msg, "died") == 0))
 	{
 		timestamp = get_time_ms() - ph->data->start_time;
-		printf("%lld | Philosopher %d %s\n", timestamp, ph->id, msg);
+		printf("%15lld | Philosopher %d %s\n", timestamp, ph->id, msg);
 	}
 	pthread_mutex_unlock(&ph->data->print_mutex);
 }
@@ -44,6 +44,7 @@ static void	cleanup(t_data *data)			// destroy the created mutexes and free the 
 	i = 0;
 	while (i < data->num_philo)
 	{
+		pthread_mutex_destroy(&data->philos[i].meal_mutex);
 		pthread_mutex_destroy(&data->forks[i]);
 		i++;
 	}
@@ -57,6 +58,7 @@ int	main(int argc, char **argv)
 {
 	t_data data;
 
+	printf(" TIMESTAMP (ms) | ACTION\n");
 	if (argc < 5 || argc > 6)				// verify incorrect argument count & display error message
 	{
 		write(1, "Invalid argument count. Usage: ./philo <number_of_", 50);

@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:46:07 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/11/17 07:16:45 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/12/02 10:40:47 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,52 @@
 
 void	philo_eat(t_philo *ph)
 {
-	if ((ph->id % 2) == 0)
+	pthread_mutex_t	*first;
+	pthread_mutex_t	*second;
+
+	// Determine a total order: always lock the lower-addressed fork first
+	if (ph->left_fork < ph->right_fork)
 	{
-		pthread_mutex_lock(ph->left_fork);
-		safe_print(ph, "has taken a fork");
-		pthread_mutex_lock(ph->right_fork);
-		safe_print(ph, "has taken a fork");
+		first = ph->left_fork;
+		second = ph->right_fork;
 	}
 	else
 	{
-		pthread_mutex_lock(ph->right_fork);
-		safe_print(ph, "has taken a fork");
-		pthread_mutex_lock(ph->left_fork);
-		safe_print(ph, "has taken a fork");
+		first = ph->right_fork;
+		second = ph->left_fork;
 	}
+
+	// Single philosopher: can only take one fork and will starve until monitor ends
+	if (ph->data->num_philo == 1)
+	{
+		pthread_mutex_lock(first);
+		safe_print(ph, "has taken a fork");
+		// Wait until simulation ends (monitor will set it)
+		while (!is_simulation_end(ph->data))
+			usleep(1000);
+		pthread_mutex_unlock(first);
+		return ;
+	}
+	pthread_mutex_lock(first);
+	safe_print(ph, "has taken a fork");
+	if (is_simulation_end(ph->data))
+	{
+		pthread_mutex_unlock(first);
+		return ;
+	}
+	pthread_mutex_lock(second);
+	safe_print(ph, "has taken a fork");
+
+	// Update meal info under protection
+	pthread_mutex_lock(&ph->meal_mutex);
 	ph->last_meal_time = get_time_ms();
 	ph->meals_eaten++;
+	pthread_mutex_unlock(&ph->meal_mutex);
+
 	safe_print(ph, "is eating");
 	usleep(ph->data->time_eat * 1000);
-	pthread_mutex_unlock(ph->left_fork);
-	pthread_mutex_unlock(ph->right_fork);
+	pthread_mutex_unlock(first);
+	pthread_mutex_unlock(second);
 }
 
 void	philo_sleep(t_philo *ph)
@@ -58,8 +84,12 @@ void	philo_think(t_philo *ph)
 void	*philo_routine(void *arg)
 {
 	t_philo	*ph = (t_philo *)arg;
+
 	if (ph->id % 2)
-    	usleep(50);
+	{
+		safe_print(ph, "is thinking");
+		usleep(50);
+	}
 	while (!is_simulation_end(ph->data))
 	{
 		philo_eat(ph);

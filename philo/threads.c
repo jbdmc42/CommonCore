@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 06:21:03 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/11/17 06:56:38 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/12/02 10:41:37 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void	join_threads(t_data *data)
 
 void	monitor(t_data *data)
 {
-	int	i;
-	int	all_ate;
+	int			i;
+	int			all_ate;
+	long long	last_meal;
+	int			meals;
 
 	while (!is_simulation_end(data))
 	{
@@ -50,13 +52,17 @@ void	monitor(t_data *data)
 		all_ate = 1;
 		while (i < data->num_philo)
 		{
-			if ((get_time_ms() - data->philos[i].last_meal_time) > data->time_die)		// check if any philosopher died
+			pthread_mutex_lock(&data->philos[i].meal_mutex);
+			last_meal = data->philos[i].last_meal_time;
+			meals = data->philos[i].meals_eaten;
+			pthread_mutex_unlock(&data->philos[i].meal_mutex);
+			if ((get_time_ms() - last_meal) > data->time_die)			// check if any philosopher died
 			{
 				safe_print(&data->philos[i], "died");
 				set_simulation_end(data);
-				return ; 
+				return ;
 			}
-			if (data->must_eat != -1 && data->philos[i].meals_eaten < data->must_eat)	// check if all philosophers ate their meals
+			if (data->must_eat != -1 && meals < data->must_eat)			// check if all philosophers ate their meals
 				all_ate = 0;
 			i++;
 		}

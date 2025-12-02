@@ -4,7 +4,9 @@
 
 NAME 		= philo
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -pthread
+#CFLAGS		+= -fsanitize=thread -g
+#CFLAGS		+= -fsanitize=address -g
 
 INCLUDES	= -I.
 

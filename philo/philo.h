@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:13:12 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/11/17 07:06:28 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/12/02 10:41:01 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_philo					// struct that contains all philosophers (we must cre
 	pthread_t		thread;				// thread of each philosopher
 	pthread_mutex_t	*left_fork;			// pointer for the fork to the left of the philosopher
 	pthread_mutex_t	*right_fork;		// pointer for the fork to the right of the philosopher
+	pthread_mutex_t	meal_mutex;			// protects last_meal_time & meals_eaten
 	t_data			*data;				// access to the global struct (aka the data struct with the general information)
 }	t_philo;
 

@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 05:11:54 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/11/17 07:21:31 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/12/02 10:42:04 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ long long	get_time_ms(void)
 static int	check_init(t_data *data, int argc)
 {
 	if (data->num_philo <= 0 || data->time_die <= 0 || data->time_eat <= 0
-		|| data->time_sleep <= 0 || (argc == 6 && data->must_eat <= 0))
+		|| data->time_sleep <= 0 || (argc == 6 && data->must_eat < 0))
 	{
 		write(2, "Invalid arguments\n", 18);
 		return (1);
 	}
+	if (argc == 6 && data->must_eat == 0)
+		exit(0);
 	return (0);
 }
 
@@ -52,7 +54,7 @@ int	init_data(t_data *data, int argc, char **argv)
 	else
 		data->must_eat = -1;
 	if (check_init(data, argc) == 1)									// check initialized general variables
-		return (1);											
+		return (1);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philo);	// allocate forks
 	if (!data->forks)
 		return (write(2, "Malloc error\n", 13), 1);
@@ -83,6 +85,7 @@ int	init_philo(t_data *data)
 		data->philos[i].data = data;
 		data->philos[i].left_fork = &data->forks[i];
 		data->philos[i].right_fork = &data->forks[(i + 1) % data->num_philo];
+		pthread_mutex_init(&data->philos[i].meal_mutex, NULL);
 		i++;
 	}
 	return (0);
