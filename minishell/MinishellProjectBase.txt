@@ -146,33 +146,3 @@ Termcap (optional)				| #include <term.h>						| tgetent				| Loads terminal des
 								|										| tgoto					| Computes cursor movement escape sequence.
 								|										| tputs					| Outputs a terminal capability string.		
 ______________________________________________________________________________________________________________________________________________________________________________________
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
-							  
