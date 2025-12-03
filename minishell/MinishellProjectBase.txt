@@ -1,0 +1,178 @@
+Minishell
+├── 1. Project Base
+│   ├── 1.1 Main loop
+│   ├── 1.2 Display prompt
+│   ├── 1.3 Read input (readline)
+│   ├── 1.4 Add input to history
+│   └── 1.5 Single global variable (signal number only)
+│
+├── 2. Signal Handling (interactive)
+│   ├── 2.1 ctrl-C → new line + new prompt
+│   ├── 2.2 ctrl-D → exit shell
+│   └── 2.3 ctrl-\ → do nothing
+│
+├── 3. Parsing
+│   ├── 3.1 Basic tokenization
+│   ├── 3.2 Correct handling of spaces
+│   ├── 3.3 Quoting
+│   │   ├── 3.3.1 Single quotes → no interpretation
+│   │   └── 3.3.2 Double quotes → no interpretation except $
+│   ├── 3.4 Variable expansion
+│   │   ├── 3.4.1 $VAR
+│   │   └── 3.4.2 $?
+│   ├── 3.5 Detect pipes
+│   └── 3.6 Detect redirections
+│       ├── <
+│       ├── >
+│       ├── >>
+│       └── << (heredoc, no history update)
+│
+├── 4. Command Structure (AST or simple commands)
+│   ├── 4.1 Command struct creation
+│   ├── 4.2 Attach redirections
+│   ├── 4.3 Attach executable + arguments
+│   └── 4.4 Attach pipeline chain
+│
+├── 5. Command Execution
+│   ├── 5.1 Built-in detection
+│   │   ├── echo -n
+│   │   ├── cd
+│   │   ├── pwd
+│   │   ├── export
+│   │   ├── unset
+│   │   ├── env
+│   │   └── exit
+│   ├── 5.2 Run built-ins without fork (when required)
+│   ├── 5.3 External command execution via PATH
+│   ├── 5.4 Resolve absolute/relative paths
+│   ├── 5.5 Child processes (fork / execve)
+│   └── 5.6 Update $? (exit status)
+│
+├── 6. Pipes
+│   ├── 6.1 Create pipes (pipe())
+│   ├── 6.2 Support multiple pipes
+│   ├── 6.3 Close correct file descriptors
+│   └── 6.4 Synchronize multiple child processes
+│
+├── 7. Redirections
+│   ├── 7.1 <  input redirect
+│   ├── 7.2 >  output truncate
+│   ├── 7.3 >> output append
+│   └── 7.4 << heredoc
+│       ├── 7.4.1 Read until delimiter
+│       ├── 7.4.2 Expansion rules (quoted/unquoted)
+│       └── 7.4.3 Use temporary pipe for heredoc
+│
+├── 8. Memory Management
+│   ├── 8.1 Free tokens
+│   ├── 8.2 Free command structures
+│   └── 8.3 Free expansions
+│
+└── 9. Final Polish & Testing
+    ├── 9.1 Compare behavior with bash
+    ├── 9.2 Test signals
+    ├── 9.3 Test invalid/malformed inputs
+    └── 9.4 Ensure no memory leaks (except readline)
+
+
+External functions we can use and what each of them do:
+______________________________________________________________________________________________________________________________________________________________________________________
+Library				| Implementation			| Functions		| Description
+--------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+Readline			| #include <readline/readline.h>	| readline		| Shows a prompt and reads user input.
+				| #include <readline/history.h>		| rl_clear_history	| Clears the history list.
+				|					| rl_on_new_line	| Notifies readline that a new line has started.
+				|					| rl_replace_line	| Replaces the buffer of the current line.
+				|					| rl_redisplay		| Redraws the current line.
+				|					| add_history		| Adds a line to history.
+--------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+Standard I/O			| #include <stdio.h>			| printf		| Formatted output to stdout.		
+				| #include <unistd.h>			| write			| Writes raw bytes to a file descriptor.
+--------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+Memory Management		| #include <stdlib.h>			| malloc		| Allocates memory.
+				|					| free			| Frees memory.
+--------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+File & Directory Access		| #include <unistd.h>			| access		| Checks file existence/permissions.
+				| #include <fcntl.h>			| open			| Opens a file and returns a descriptor.
+				|					| read			| Reads bytes from a file descriptor.
+				|					| close			| Closes a file descriptor.
+				|					| unlink		| Removes a file.
+--------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+Process Control			| #include <unistd.h>			| fork			| Creates a child process.
+				| #include <sys/wait.h>			| wait			| Waits for any child to exit.
+				| #include <stdlib.h>			| waitpid		| Waits for a specific child.
+				|					| wait3			| Waits + resource usage info.
+				|					| wait4			| Waits + resource usage info (targeted).
+				|					| exit			| Ends the current process.
+				|					| execve		| Replaces current process with new program.
+--------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+Signals				| #include <signal.h>			| signal		| Simple (old) signal handling.
+				|					| sigaction		| Modern signal handler configuration.
+				|					| sigemptyset		| Clears a signal set.
+				|					| sigaddset		| Adds a signal to a set.
+				|					| kill			| Sends a signal to a process.
+--------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+Current Directory & Path	| #include <unistd.h>			| getcwd 		| Gets current working directory path.
+				|					| chdir			| Changes current working directory.
+--------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+File Information		| #include <sys/stat.h>			| stat			| File info (follows symlinks).
+				| #include <unistd.h>			| lstat			| File info (doesn’t follow symlinks).
+				|					| fstat			| File info using file descriptor.
+--------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+Pipes & File Descriptors	| #include <unistd.h>			| pipe			| Creates a pipe (two connected fds).
+				|					| dup			| Duplicates a file descriptor.
+				|					| dup2			| Duplicates fd into a specific number (useful for redirections).
+--------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+Directory Handling		| #include <dirent.h>			| opendir		| Opens a directory stream.
+				|					| readdir		| Reads entries inside a directory.
+				|					| closedir		| Closes a directory stream.
+--------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+Error Handling			| #include <string.h>			| strerror		| Returns a string for an error code.
+				| #include <stdio.h>			| perror		| Prints a formatted error based on errno.
+--------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+Terminal/TTY Control		| #include <unistd.h>			| isatty		| Checks if a fd is a terminal.
+				| #include <termios.h>			| ttyname		| Gets terminal name of a fd.
+				| #include <sys/ioctl.h>		| ttyslot		| Returns terminal slot index.
+				|					| ioctl			| Low-level terminal or device control.
+				|					| tcsetattr		| Sets terminal attributes.
+				|					| tcgetattr		| Gets terminal attributes.
+--------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+Environment Variables		| #include <stdlib.h>			| getenv		| Gets an environment variable value.
+--------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
+Termcap (optional)		| #include <term.h>			| tgetent		| Loads terminal description.
+*usually linked with -ltermcap	|					| tgetflag		| Gets boolean terminal capability.
+				|					| tgetnum		| Gets numeric terminal capability.
+				|					| tgetstr		| Gets string terminal capability.
+				|					| tgoto			| Computes cursor movement escape sequence.
+				|					| tputs			| Outputs a terminal capability string.		
+______________________________________________________________________________________________________________________________________________________________________________________
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
+							  
