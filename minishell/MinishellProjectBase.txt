@@ -77,74 +77,74 @@ Minishell
 
 External functions we can use and what each of them do:
 ______________________________________________________________________________________________________________________________________________________________________________________
-Library				| Implementation			| Functions		| Description
+Library							| Implementation						| Functions				| Description
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Readline			| #include <readline/readline.h>	| readline		| Shows a prompt and reads user input.
-				| #include <readline/history.h>		| rl_clear_history	| Clears the history list.
-				|					| rl_on_new_line	| Notifies readline that a new line has started.
-				|					| rl_replace_line	| Replaces the buffer of the current line.
-				|					| rl_redisplay		| Redraws the current line.
-				|					| add_history		| Adds a line to history.
+Readline						| #include <readline/readline.h>		| readline				| Shows a prompt and reads user input.
+								| #include <readline/history.h>			| rl_clear_history		| Clears the history list.
+								|										| rl_on_new_line		| Notifies readline that a new line has started.
+								|										| rl_replace_line		| Replaces the buffer of the current line.
+								|										| rl_redisplay			| Redraws the current line.
+								|										| add_history			| Adds a line to history.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Standard I/O			| #include <stdio.h>			| printf		| Formatted output to stdout.		
-				| #include <unistd.h>			| write			| Writes raw bytes to a file descriptor.
+Standard I/O					| #include <stdio.h>					| printf				| Formatted output to stdout.		
+								| #include <unistd.h>					| write					| Writes raw bytes to a file descriptor.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Memory Management		| #include <stdlib.h>			| malloc		| Allocates memory.
-				|					| free			| Frees memory.
+Memory Management				| #include <stdlib.h>					| malloc				| Allocates memory.
+								|										| free					| Frees memory.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-File & Directory Access		| #include <unistd.h>			| access		| Checks file existence/permissions.
-				| #include <fcntl.h>			| open			| Opens a file and returns a descriptor.
-				|					| read			| Reads bytes from a file descriptor.
-				|					| close			| Closes a file descriptor.
-				|					| unlink		| Removes a file.
+File & Directory Access			| #include <unistd.h>					| access				| Checks file existence/permissions.
+								| #include <fcntl.h>					| open					| Opens a file and returns a descriptor.
+								|										| read					| Reads bytes from a file descriptor.
+								|										| close					| Closes a file descriptor.
+								|										| unlink				| Removes a file.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Process Control			| #include <unistd.h>			| fork			| Creates a child process.
-				| #include <sys/wait.h>			| wait			| Waits for any child to exit.
-				| #include <stdlib.h>			| waitpid		| Waits for a specific child.
-				|					| wait3			| Waits + resource usage info.
-				|					| wait4			| Waits + resource usage info (targeted).
-				|					| exit			| Ends the current process.
-				|					| execve		| Replaces current process with new program.
+Process Control					| #include <unistd.h>					| fork					| Creates a child process.
+								| #include <sys/wait.h>					| wait					| Waits for any child to exit.
+								| #include <stdlib.h>					| waitpid				| Waits for a specific child.
+								|										| wait3					| Waits + resource usage info.
+								|										| wait4					| Waits + resource usage info (targeted).
+								|										| exit					| Ends the current process.
+								|										| execve				| Replaces current process with new program.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Signals				| #include <signal.h>			| signal		| Simple (old) signal handling.
-				|					| sigaction		| Modern signal handler configuration.
-				|					| sigemptyset		| Clears a signal set.
-				|					| sigaddset		| Adds a signal to a set.
-				|					| kill			| Sends a signal to a process.
+Signals							| #include <signal.h>					| signal				| Simple (old) signal handling.
+								|										| sigaction				| Modern signal handler configuration.
+								|										| sigemptyset			| Clears a signal set.
+								|										| sigaddset				| Adds a signal to a set.
+								|										| kill					| Sends a signal to a process.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Current Directory & Path	| #include <unistd.h>			| getcwd 		| Gets current working directory path.
-				|					| chdir			| Changes current working directory.
+Current Directory & Path		| #include <unistd.h>					| getcwd 				| Gets current working directory path.
+								|										| chdir					| Changes current working directory.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-File Information		| #include <sys/stat.h>			| stat			| File info (follows symlinks).
-				| #include <unistd.h>			| lstat			| File info (doesn’t follow symlinks).
-				|					| fstat			| File info using file descriptor.
+File Information				| #include <sys/stat.h>					| stat					| File info (follows symlinks).
+								| #include <unistd.h>					| lstat					| File info (doesn’t follow symlinks).
+								|										| fstat					| File info using file descriptor.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Pipes & File Descriptors	| #include <unistd.h>			| pipe			| Creates a pipe (two connected fds).
-				|					| dup			| Duplicates a file descriptor.
-				|					| dup2			| Duplicates fd into a specific number (useful for redirections).
+Pipes & File Descriptors		| #include <unistd.h>					| pipe					| Creates a pipe (two connected fds).
+								|										| dup					| Duplicates a file descriptor.
+								|										| dup2					| Duplicates fd into a specific number (useful for redirections).
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Directory Handling		| #include <dirent.h>			| opendir		| Opens a directory stream.
-				|					| readdir		| Reads entries inside a directory.
-				|					| closedir		| Closes a directory stream.
+Directory Handling				| #include <dirent.h>					| opendir				| Opens a directory stream.
+								|										| readdir				| Reads entries inside a directory.
+								|										| closedir				| Closes a directory stream.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Error Handling			| #include <string.h>			| strerror		| Returns a string for an error code.
-				| #include <stdio.h>			| perror		| Prints a formatted error based on errno.
+Error Handling					| #include <string.h>					| strerror				| Returns a string for an error code.
+								| #include <stdio.h>					| perror				| Prints a formatted error based on errno.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Terminal/TTY Control		| #include <unistd.h>			| isatty		| Checks if a fd is a terminal.
-				| #include <termios.h>			| ttyname		| Gets terminal name of a fd.
-				| #include <sys/ioctl.h>		| ttyslot		| Returns terminal slot index.
-				|					| ioctl			| Low-level terminal or device control.
-				|					| tcsetattr		| Sets terminal attributes.
-				|					| tcgetattr		| Gets terminal attributes.
+Terminal/TTY Control			| #include <unistd.h>					| isatty				| Checks if a fd is a terminal.
+								| #include <termios.h>					| ttyname				| Gets terminal name of a fd.
+								| #include <sys/ioctl.h>				| ttyslot				| Returns terminal slot index.
+								|										| ioctl					| Low-level terminal or device control.
+								|										| tcsetattr				| Sets terminal attributes.
+								|										| tcgetattr				| Gets terminal attributes.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Environment Variables		| #include <stdlib.h>			| getenv		| Gets an environment variable value.
+Environment Variables			| #include <stdlib.h>					| getenv				| Gets an environment variable value.
 --------------------------------|---------------------------------------|-----------------------|------------------------------------------------------------------------------------>
-Termcap (optional)		| #include <term.h>			| tgetent		| Loads terminal description.
-*usually linked with -ltermcap	|					| tgetflag		| Gets boolean terminal capability.
-				|					| tgetnum		| Gets numeric terminal capability.
-				|					| tgetstr		| Gets string terminal capability.
-				|					| tgoto			| Computes cursor movement escape sequence.
-				|					| tputs			| Outputs a terminal capability string.		
+Termcap (optional)				| #include <term.h>						| tgetent				| Loads terminal description.
+*usually linked with -ltermcap	|										| tgetflag				| Gets boolean terminal capability.
+								|										| tgetnum				| Gets numeric terminal capability.
+								|										| tgetstr				| Gets string terminal capability.
+								|										| tgoto					| Computes cursor movement escape sequence.
+								|										| tputs					| Outputs a terminal capability string.		
 ______________________________________________________________________________________________________________________________________________________________________________________
 							  
 							  
