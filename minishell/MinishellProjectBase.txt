@@ -1,17 +1,17 @@
 Minishell
-├── 1. Project Base
+├── 1. Project Base													> DONE <
 │   ├── 1.1 Main loop
 │   ├── 1.2 Display prompt
 │   ├── 1.3 Read input (readline)
 │   ├── 1.4 Add input to history
 │   └── 1.5 Single global variable (signal number only)
 │
-├── 2. Signal Handling (interactive)
+├── 2. Signal Handling (interactive)								> DONE <
 │   ├── 2.1 ctrl-C → new line + new prompt
 │   ├── 2.2 ctrl-D → exit shell
 │   └── 2.3 ctrl-\ → do nothing
 │
-├── 3. Parsing
+├── 3. Parsing														> CURRENTLY WORKING <
 │   ├── 3.1 Basic tokenization
 │   ├── 3.2 Correct handling of spaces
 │   ├── 3.3 Quoting
