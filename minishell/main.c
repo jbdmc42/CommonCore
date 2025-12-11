@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:24 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/12/08 10:55:03 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/12/10 22:23:04 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ static void	main_loop(void)
 		}
 		while (line[i] && (line[i] == ' ' || line[i] == '\t'))		// empty line or the line only contains spaces/tabs
 			i++;
-		if (line[i] == '\0')		// if the line is empty, we skip the loop and restart it
+		if (line[i] == '\0')			// if the line is empty, we skip the loop and restart it
 		{
 			free(line);
 			continue ;
 		}
-		parse_input(line, i);
-		g_global.exit_status = 0;	// set the exit status as not exiting
-		free(line);					// free the line for the next read
+		parse_input(line, i);			// turn the line into tokens
+		g_global.exit_status = 0;		// set the exit status as not exiting
+		free(line);						// free the line for the next read
 	}
 }
 

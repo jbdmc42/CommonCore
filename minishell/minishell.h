@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/12/08 11:31:45 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/12/10 14:47:04 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,21 @@ typedef struct s_global
 
 extern t_global	g_global;
 
+typedef enum e_tokentype
+{
+	WORD,		// text (echo, cd, ls, hello, file.txt, ...)
+	PIPE,		// |
+	GREAT,		// >
+	DGREAT,		// >>
+	LESS,		// <
+	DLESS		// <<
+}	t_tokentype;
+
 typedef struct s_token
 {
-	char	*value;
-	int		type;			// defines the token type (CMD / ARG / PIPE / REDIR_IN / REDIR_OUT / ...)
+	char			*value;
+	t_tokentype		type;
+	struct s_token	*next;
 }	t_token;
 
 // Libraries
