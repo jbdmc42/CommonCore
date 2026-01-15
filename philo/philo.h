@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 15:13:12 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/12/02 10:41:01 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/01/15 09:22:29 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ typedef struct s_data					// global struct that contains the general information
 	long long		start_time;			// initial timestamp for the simulation
 	int				simulation_end;		// flag to end the threads safely
 	pthread_mutex_t	*forks;				// fork array (contains all forks available to be used by the philosophers)
+	int				*fork_in_use;		// fork reservation state (protected by waiter_mutex)
+	pthread_mutex_t	waiter_mutex;		// protects fork_in_use and scheduling
+	pthread_cond_t	waiter_cond;			// signals fork availability / scheduling changes
 	pthread_mutex_t	print_mutex;		// mutex to protect the log printing
 	pthread_mutex_t	end_mutex;			// mutex to protect the simulation end
 	struct s_philo	*philos;			// philosopher array
@@ -46,6 +49,9 @@ typedef struct s_philo					// struct that contains all philosophers (we must cre
 	pthread_t		thread;				// thread of each philosopher
 	pthread_mutex_t	*left_fork;			// pointer for the fork to the left of the philosopher
 	pthread_mutex_t	*right_fork;		// pointer for the fork to the right of the philosopher
+	int				left_index;			// fork index to the left
+	int				right_index;		// fork index to the right
+	int				waiting;			// waiting for permission to eat (protected by waiter_mutex)
 	pthread_mutex_t	meal_mutex;			// protects last_meal_time & meals_eaten
 	t_data			*data;				// access to the global struct (aka the data struct with the general information)
 }	t_philo;

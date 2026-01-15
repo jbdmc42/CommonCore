@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 05:11:54 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/12/02 10:42:04 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/01/15 09:22:30 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void	init_generals(t_data *data)
 {
 	pthread_mutex_init(&data->print_mutex, NULL);
 	pthread_mutex_init(&data->end_mutex, NULL);
+	pthread_mutex_init(&data->waiter_mutex, NULL);
+	pthread_cond_init(&data->waiter_cond, NULL);
 	data->simulation_end = 0;
 	data->start_time = get_time_ms();
 }
@@ -58,6 +60,19 @@ int	init_data(t_data *data, int argc, char **argv)
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philo);	// allocate forks
 	if (!data->forks)
 		return (write(2, "Malloc error\n", 13), 1);
+	data->fork_in_use = malloc(sizeof(int) * data->num_philo);
+	if (!data->fork_in_use)
+	{
+		free(data->forks);
+		data->forks = NULL;
+		return (write(2, "Malloc error\n", 13), 1);
+	}
+	i = 0;
+	while (i < data->num_philo)
+	{
+		data->fork_in_use[i] = 0;
+		i++;
+	}
 	i = 0;
 	while (i < data->num_philo)											// init fork mutexes
 	{
@@ -85,6 +100,9 @@ int	init_philo(t_data *data)
 		data->philos[i].data = data;
 		data->philos[i].left_fork = &data->forks[i];
 		data->philos[i].right_fork = &data->forks[(i + 1) % data->num_philo];
+		data->philos[i].left_index = i;
+		data->philos[i].right_index = (i + 1) % data->num_philo;
+		data->philos[i].waiting = 0;
 		pthread_mutex_init(&data->philos[i].meal_mutex, NULL);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:25:30 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/12/02 11:23:56 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/01/15 09:22:30 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,12 @@ static void	cleanup(t_data *data)			// destroy the created mutexes and free the 
 		pthread_mutex_destroy(&data->forks[i]);
 		i++;
 	}
+	pthread_mutex_destroy(&data->waiter_mutex);
+	pthread_cond_destroy(&data->waiter_cond);
 	pthread_mutex_destroy(&data->print_mutex);
 	pthread_mutex_destroy(&data->end_mutex);
 	free(data->forks);
+	free(data->fork_in_use);
 	free(data->philos);
 }
 

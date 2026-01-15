@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:40:14 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/11/17 06:15:34 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/01/15 09:22:29 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ void	set_simulation_end(t_data *data)
 	pthread_mutex_lock(&data->end_mutex);
 	data->simulation_end = 1;
 	pthread_mutex_unlock(&data->end_mutex);
+	pthread_mutex_lock(&data->waiter_mutex);
+	pthread_cond_broadcast(&data->waiter_cond);
+	pthread_mutex_unlock(&data->waiter_mutex);
 }
 
 int	is_simulation_end(t_data *data)

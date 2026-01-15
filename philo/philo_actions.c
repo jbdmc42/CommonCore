@@ -6,11 +6,105 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 09:46:07 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/12/02 10:40:47 by jbdmc            ###   ########.fr       */
+/*   Updated: 2026/01/15 09:25:56 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static long long	get_last_meal_time(t_philo *ph)
+{
+	long long	last_meal;
+
+	pthread_mutex_lock(&ph->meal_mutex);
+	last_meal = ph->last_meal_time;
+	pthread_mutex_unlock(&ph->meal_mutex);
+	return (last_meal);
+}
+
+static t_philo	*choose_hungriest_waiting(t_data *data)
+{
+	int			i;
+	long long	now;
+	long long	best_hunger;
+	t_philo		*best;
+
+	now = get_time_ms();
+	best = NULL;
+	best_hunger = -1;
+	i = 0;
+	while (i < data->num_philo)
+	{
+		t_philo *p = &data->philos[i];
+		if (p->waiting)
+		{
+			long long hunger = now - get_last_meal_time(p);
+			if (!best || hunger > best_hunger
+				|| (hunger == best_hunger && p->id < best->id))
+			{
+				best = p;
+				best_hunger = hunger;
+			}
+		}
+		i++;
+	}
+	return (best);
+}
+
+static int	forks_overlap(t_philo *a, t_philo *b)
+{
+	if (!a || !b)
+		return (0);
+	if (a->left_index == b->left_index || a->left_index == b->right_index)
+		return (1);
+	if (a->right_index == b->left_index || a->right_index == b->right_index)
+		return (1);
+	return (0);
+}
+
+static int	reserve_forks_fair(t_philo *ph)
+{
+	t_data	*data;
+
+	data = ph->data;
+	pthread_mutex_lock(&data->waiter_mutex);
+	ph->waiting = 1;
+	while (!is_simulation_end(data))
+	{
+		t_philo *priority = choose_hungriest_waiting(data);
+		if (priority && priority != ph && forks_overlap(ph, priority))
+		{
+			pthread_cond_wait(&data->waiter_cond, &data->waiter_mutex);
+			continue ;
+		}
+		if (data->fork_in_use[ph->left_index] == 0
+			&& data->fork_in_use[ph->right_index] == 0
+			&& (!priority || priority == ph || !forks_overlap(ph, priority)))
+		{
+			data->fork_in_use[ph->left_index] = 1;
+			data->fork_in_use[ph->right_index] = 1;
+			ph->waiting = 0;
+			pthread_mutex_unlock(&data->waiter_mutex);
+			return (1);
+		}
+		pthread_cond_wait(&data->waiter_cond, &data->waiter_mutex);
+	}
+	ph->waiting = 0;
+	pthread_mutex_unlock(&data->waiter_mutex);
+	return (0);
+}
+
+static void	release_reserved_forks(t_philo *ph)
+{
+	t_data	*data;
+
+	data = ph->data;
+	pthread_mutex_lock(&data->waiter_mutex);
+	data->fork_in_use[ph->left_index] = 0;
+	data->fork_in_use[ph->right_index] = 0;
+	pthread_cond_broadcast(&data->waiter_cond);
+	pthread_mutex_unlock(&data->waiter_mutex);
+}
 
 /*
 ** philo_eat	--> depends on philo_pickup_fork (philosopher X picks up 2 forks from the table (mutex lock on both forks on pick up and mutex unlock on lay down))
@@ -47,11 +141,19 @@ void	philo_eat(t_philo *ph)
 		pthread_mutex_unlock(first);
 		return ;
 	}
+	if (!reserve_forks_fair(ph))
+		return ;
+	if (is_simulation_end(ph->data))
+	{
+		release_reserved_forks(ph);
+		return ;
+	}
 	pthread_mutex_lock(first);
 	safe_print(ph, "has taken a fork");
 	if (is_simulation_end(ph->data))
 	{
 		pthread_mutex_unlock(first);
+		release_reserved_forks(ph);
 		return ;
 	}
 	pthread_mutex_lock(second);
@@ -67,6 +169,7 @@ void	philo_eat(t_philo *ph)
 	usleep(ph->data->time_eat * 1000);
 	pthread_mutex_unlock(first);
 	pthread_mutex_unlock(second);
+	release_reserved_forks(ph);
 }
 
 void	philo_sleep(t_philo *ph)
