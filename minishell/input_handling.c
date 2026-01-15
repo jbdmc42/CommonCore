@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 10:44:02 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/12/08 10:44:42 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/12/15 15:26:10 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,6 @@ char	*read_input(void)
 		return NULL;
 	while (line[i] && (line[i] == ' ' || line[i] == '\t'))						// skip initial spaces
 		i++;
-	if ((ft_strncmp(&line[i], "exit", 4) == 0) &&								// exit command
-		(line[i + 4] == '\0' ||	line[i + 4] == ' ' || line[i + 4] == '\t'))		// if we find exit with a space, null character or tab after, we exit the program
-		return NULL;
 	if (!ft_strisspace(line))													// case: line is not empty (has >0 chars), adds to the history
 		add_history(line);
 	return (line);

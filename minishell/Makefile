@@ -15,10 +15,13 @@ INCLUDES	= -I. -I$(LIBFT_DIR)
 
 SRCS		= main.c \
 			cleaning.c \
-			echo.c \
+			commands_extra.c \
+			commands.c \
 			input_handling.c \
+			parsing_helpers.c \
 			parsing.c \
-			setup_signal_handlers.c
+			setup_signal_handlers.c \
+			tokenization.c
 
 OBJS		= $(SRCS:.c=.o)
 

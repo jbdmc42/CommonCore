@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 10:44:36 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/12/07 15:28:56 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/12/15 15:30:29 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	clean_exit(void)
 {
 	free_all();
 	printf(EXIT);
-	g_global.exit_status = 1;
-	return ;
+	g_global.exit_status = 2;
+	exit(g_global.exit_status);
 }

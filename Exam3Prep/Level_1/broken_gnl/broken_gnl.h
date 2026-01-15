@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   broken_gnl.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joaobarb <joaobarb@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 11:15:27 by joaobarb          #+#    #+#             */
-/*   Updated: 2025/11/05 15:53:49 by joaobarb         ###   ########.fr       */
+/*   Updated: 2025/11/05 17:39:21 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include <stdlib.h> 
 # include <fcntl.h>
 
-char	*ft_strdup(char *str);		// there's not actual need to declare this function, as it can also be a static function
+char	*ft_strdup(char *str);		// there's no actual need to declare this function, as it can also be a static function
 char	*get_next_line(int fd);
 
 #endif

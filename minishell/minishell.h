@@ -6,7 +6,7 @@
 /*   By: jbdmc <jbdmc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 11:19:34 by jbdmc             #+#    #+#             */
-/*   Updated: 2025/12/10 14:47:04 by jbdmc            ###   ########.fr       */
+/*   Updated: 2025/12/15 12:01:31 by jbdmc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,44 @@ typedef struct s_token
 void	free_all(void);
 void	clean_exit(void);
 
+// commands_extra.c:
+/* void	ft_unset(t_token **tokens);
+void	ft_env(t_token **tokens); */
+int		is_valid_n_flag(char *s);
+
+// commands.c:
+void	ft_echo(t_token **tokens);
+/* void	ft_cd(t_token **tokens);
+void	ft_pwd(t_token **tokens);
+void	ft_export(t_token **tokens); */
+void	get_commands(t_token **tokens);
+
 // echo.c:
-int		found_echo(char *line, size_t i, int *flag);
-void	ft_echo(char *line, size_t i, int *flag);
 
 // input_handling.c:
 int		ft_strisspace(char *line);
 char	*read_input(void);
 
+// parsing_helpers.c:
+int		parse_pipe(char *line, size_t *i, t_token **tokens);
+int		parse_less(char *line, size_t *i, t_token **tokens);
+int		parse_great(char *line, size_t *i, t_token **tokens);
+int		parse_single_quotes(char *line, size_t *i, t_token **tokens);
+int		parse_double_quotes(char *line, size_t *i, t_token **tokens);
+
 // parsing.c:
-void	parse_input(char *line, size_t i);
+void	parse_input(char *line, size_t i, t_token **tokens);
+int		syntaxe_error(char *line, size_t i);
+int		skip_spaces(char *line, size_t *i);
 
 // setup_signal_handlers.c:
 void	sigint_handler(int sig);
 void	setup_signal_handlers(void);
+
+// tokenization.c:
+void	add_token(char *value, t_tokentype type, t_token **tokens);
+
+// temp
+void	print_tokens(t_token *tokens);
 
 #endif

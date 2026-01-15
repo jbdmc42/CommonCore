@@ -12,16 +12,16 @@ Minishell
 │   └── 2.3 ctrl-\ → do nothing
 │
 ├── 3. Parsing														> CURRENTLY WORKING <
-│   ├── 3.1 Basic tokenization
-│   ├── 3.2 Correct handling of spaces
-│   ├── 3.3 Quoting
-│   │   ├── 3.3.1 Single quotes → no interpretation
-│   │   └── 3.3.2 Double quotes → no interpretation except $
+│   ├── 3.1 Basic tokenization										-
+│   ├── 3.2 Correct handling of spaces								-
+│   ├── 3.3 Quoting													-
+│   │   ├── 3.3.1 Single quotes → no interpretation					-
+│   │   └── 3.3.2 Double quotes → no interpretation except $		- (handle exception $)
 │   ├── 3.4 Variable expansion
 │   │   ├── 3.4.1 $VAR
 │   │   └── 3.4.2 $?
-│   ├── 3.5 Detect pipes
-│   └── 3.6 Detect redirections
+│   ├── 3.5 Detect pipes											- (create the pipe system)
+│   └── 3.6 Detect redirections										- (create the redirection system)
 │       ├── <
 │       ├── >
 │       ├── >>
