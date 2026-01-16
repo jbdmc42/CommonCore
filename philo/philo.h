@@ -21,66 +21,76 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-// Structs
-
-typedef struct s_data					// global struct that contains the general informations needed for the program to work
+typedef struct s_data
 {
-	int				num_philo;			// total number of philosophers
-	long long		time_die;			// maximum time a philosopher can live without eating
-	long long		time_eat;			// time that a philosopher needs to eat
-	long long		time_sleep;			// time that a philosopher needs to sleep
-	int				must_eat;			// number of times that each philosopher should eat (if determined)
-	long long		start_time;			// initial timestamp for the simulation
-	int				simulation_end;		// flag to end the threads safely
-	pthread_mutex_t	*forks;				// fork array (contains all forks available to be used by the philosophers)
-	int				*fork_in_use;		// fork reservation state (protected by waiter_mutex)
-	pthread_mutex_t	waiter_mutex;		// protects fork_in_use and scheduling
-	pthread_cond_t	waiter_cond;			// signals fork availability / scheduling changes
-	pthread_mutex_t	print_mutex;		// mutex to protect the log printing
-	pthread_mutex_t	end_mutex;			// mutex to protect the simulation end
-	struct s_philo	*philos;			// philosopher array
+	int				num_philo;
+	long long		time_die;
+	long long		time_eat;
+	long long		time_sleep;
+	int				must_eat;
+	long long		start_time;
+	int				simulation_end;
+	pthread_mutex_t	*forks;
+	int				*fork_in_use;
+	pthread_mutex_t	waiter_mutex;
+	pthread_cond_t	waiter_cond;
+	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	end_mutex;
+	struct s_philo	*philos;
 }	t_data;
 
-typedef struct s_philo					// struct that contains all philosophers (we must create a t_philo * variable to store the philosophers)
+typedef struct s_philo
 {
-	int				id;					// number of the philosopher
-	int				meals_eaten;		// total meals eaten by the philosopher
-	long long		last_meal_time;		// time of the last meal eaten by the philosopher
-	pthread_t		thread;				// thread of each philosopher
-	pthread_mutex_t	*left_fork;			// pointer for the fork to the left of the philosopher
-	pthread_mutex_t	*right_fork;		// pointer for the fork to the right of the philosopher
-	int				left_index;			// fork index to the left
-	int				right_index;		// fork index to the right
-	int				waiting;			// waiting for permission to eat (protected by waiter_mutex)
-	pthread_mutex_t	meal_mutex;			// protects last_meal_time & meals_eaten
-	t_data			*data;				// access to the global struct (aka the data struct with the general information)
+	int				id;
+	int				meals_eaten;
+	long long		last_meal_time;
+	pthread_t		thread;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
+	int				left_index;
+	int				right_index;
+	int				waiting;
+	pthread_mutex_t	meal_mutex;
+	t_data			*data;
 }	t_philo;
 
-// Functions
+void		safe_print(t_philo *ph, const char *msg);
 
-// main.c:
-void	safe_print(t_philo *ph, const char *msg);
-
-// init.c:
 long long	get_time_ms(void);
 int			init_data(t_data *data, int argc, char **argv);
-int 		init_philo(t_data *data);
+int			init_philo(t_data *data);
 
-// philo_actions.c:
 void		philo_eat(t_philo *ph);
 void		philo_sleep(t_philo *ph);
 void		philo_think(t_philo *ph);
 void		*philo_routine(void *arg);
 
-// threads.c:
 int			create_threads(t_data *data);
 void		join_threads(t_data *data);
 void		monitor(t_data *data);
 
-// utilities.c:
 int			ft_atoi(const char *str);
 void		set_simulation_end(t_data *data);
 int			is_simulation_end(t_data *data);
+int			init_forks_malloc(t_data *data);
+int			init_forks_mutex(t_data *data);
+
+long long	get_last_meal_time(t_philo *ph);
+int			is_better_candidate(t_philo *best, long long best_hunger,
+				long long hunger, int id);
+
+int			forks_overlap(t_philo *a, t_philo *b);
+void		release_reserved_forks(t_philo *ph);
+t_philo		*choose_hungriest_waiting(t_data *data);
+
+int			reserve_forks_fair(t_philo *ph);
+
+void		handle_single_philo(t_philo *ph, pthread_mutex_t *fork);
+void		update_meal_info(t_philo *ph);
+void		get_fork_order(t_philo *ph, pthread_mutex_t **first,
+				pthread_mutex_t **second);
+
+int			check_philo_death(t_data *data, int i);
+int			check_all_ate(t_data *data, int i);
 
 #endif
-

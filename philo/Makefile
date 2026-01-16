@@ -15,6 +15,11 @@ SRCS		= main.c \
 			philo_actions.c \
 			threads.c \
 			utilities.c \
+			utilities_two.c \
+			utilities_three.c \
+			utilities_four.c \
+			utilities_five.c \
+			utilities_six.c
 
 OBJS		= $(SRCS:.c=.o)
 

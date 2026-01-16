@@ -50,9 +50,44 @@ void	set_simulation_end(t_data *data)
 int	is_simulation_end(t_data *data)
 {
 	int	val;
-	
+
 	pthread_mutex_lock(&data->end_mutex);
 	val = data->simulation_end;
 	pthread_mutex_unlock(&data->end_mutex);
 	return (val);
+}
+
+int	init_forks_malloc(t_data *data)
+{
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philo);
+	if (!data->forks)
+		return (write(2, "Malloc error\n", 13), 1);
+	data->fork_in_use = malloc(sizeof(int) * data->num_philo);
+	if (!data->fork_in_use)
+	{
+		free(data->forks);
+		data->forks = NULL;
+		return (write(2, "Malloc error\n", 13), 1);
+	}
+	return (0);
+}
+
+int	init_forks_mutex(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->num_philo)
+	{
+		data->fork_in_use[i] = 0;
+		i++;
+	}
+	i = 0;
+	while (i < data->num_philo)
+	{
+		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
+			return (write(2, "Mutex init error\n", 17), 1);
+		i++;
+	}
+	return (0);
 }

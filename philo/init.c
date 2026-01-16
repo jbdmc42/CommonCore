@@ -14,7 +14,7 @@
 
 long long	get_time_ms(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec * 1000LL + tv.tv_usec / 1000);
@@ -45,8 +45,6 @@ static void	init_generals(t_data *data)
 
 int	init_data(t_data *data, int argc, char **argv)
 {
-	int	i;
-
 	data->num_philo = ft_atoi(argv[1]);
 	data->time_die = ft_atoi(argv[2]);
 	data->time_eat = ft_atoi(argv[3]);
@@ -55,32 +53,13 @@ int	init_data(t_data *data, int argc, char **argv)
 		data->must_eat = ft_atoi(argv[5]);
 	else
 		data->must_eat = -1;
-	if (check_init(data, argc) == 1)									// check initialized general variables
+	if (check_init(data, argc) == 1)
 		return (1);
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philo);	// allocate forks
-	if (!data->forks)
-		return (write(2, "Malloc error\n", 13), 1);
-	data->fork_in_use = malloc(sizeof(int) * data->num_philo);
-	if (!data->fork_in_use)
-	{
-		free(data->forks);
-		data->forks = NULL;
-		return (write(2, "Malloc error\n", 13), 1);
-	}
-	i = 0;
-	while (i < data->num_philo)
-	{
-		data->fork_in_use[i] = 0;
-		i++;
-	}
-	i = 0;
-	while (i < data->num_philo)											// init fork mutexes
-	{
-		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
-			return (write(2, "Mutex init error\n", 17), 1);
-		i++;
-	}
-	init_generals(data);												// init other general variables
+	if (init_forks_malloc(data) == 1)
+		return (1);
+	if (init_forks_mutex(data) == 1)
+		return (1);
+	init_generals(data);
 	return (0);
 }
 

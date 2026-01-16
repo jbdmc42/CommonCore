@@ -37,7 +37,7 @@ void	safe_print(t_philo *ph, const char *msg)
 	pthread_mutex_unlock(&ph->data->print_mutex);
 }
 
-static void	cleanup(t_data *data)			// destroy the created mutexes and free the allocated arrays
+static void	cleanup(t_data *data)
 {
 	int	i;
 
@@ -59,25 +59,25 @@ static void	cleanup(t_data *data)			// destroy the created mutexes and free the 
 
 int	main(int argc, char **argv)
 {
-	t_data data;
+	t_data	data;
 
 	printf(" TIMESTAMP (ms) | ACTION\n");
-	if (argc < 5 || argc > 6)				// verify incorrect argument count & display error message
+	if (argc < 5 || argc > 6)
 	{
 		write(1, "Invalid argument count. Usage: ./philo <number_of_", 50);
 		write(1, "philosophers> <time_to_die> <time_to_eat> <time_to_s", 52);
 		write(1, "leep> <[number_of_times_each_philosopher_must_eat]>\n", 52);
 		return (1);
 	}
-	if (init_data(&data, argc, argv) != 0)	// init global data struct with a protection
+	if (init_data(&data, argc, argv) != 0)
 		return (1);
-	if (init_philo(&data) != 0)				// init philosophers data struct with a protection (aka init philo array)
+	if (init_philo(&data) != 0)
 		return (1);
-	if (create_threads(&data) != 0)			// create the philosophers threads
+	if (create_threads(&data) != 0)
 		return (1);
-	monitor(&data);							// function that will detect deaths and meals eaten
-	set_simulation_end(&data);				// function that will set the simulation end
-	join_threads(&data);					// function that will wait for all threads to end
-	cleanup(&data);							// function that will free all the memory and destroy the mutexes
+	monitor(&data);
+	set_simulation_end(&data);
+	join_threads(&data);
+	cleanup(&data);
 	return (0);
 }

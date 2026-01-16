@@ -20,7 +20,7 @@ int	create_threads(t_data *data)
 	while (i < data->num_philo)
 	{
 		if (pthread_create(&data->philos[i].thread, NULL, philo_routine,
-			&data->philos[i]) != 0)
+				&data->philos[i]) != 0)
 			return (write(2, "Error creating thread\n", 22), 1);
 		i++;
 	}
@@ -41,10 +41,8 @@ void	join_threads(t_data *data)
 
 void	monitor(t_data *data)
 {
-	int			i;
-	int			all_ate;
-	long long	last_meal;
-	int			meals;
+	int	i;
+	int	all_ate;
 
 	while (!is_simulation_end(data))
 	{
@@ -52,17 +50,9 @@ void	monitor(t_data *data)
 		all_ate = 1;
 		while (i < data->num_philo)
 		{
-			pthread_mutex_lock(&data->philos[i].meal_mutex);
-			last_meal = data->philos[i].last_meal_time;
-			meals = data->philos[i].meals_eaten;
-			pthread_mutex_unlock(&data->philos[i].meal_mutex);
-			if ((get_time_ms() - last_meal) > data->time_die)			// check if any philosopher died
-			{
-				safe_print(&data->philos[i], "died");
-				set_simulation_end(data);
+			if (check_philo_death(data, i))
 				return ;
-			}
-			if (data->must_eat != -1 && meals < data->must_eat)			// check if all philosophers ate their meals
+			if (!check_all_ate(data, i))
 				all_ate = 0;
 			i++;
 		}
@@ -71,6 +61,6 @@ void	monitor(t_data *data)
 			set_simulation_end(data);
 			return ;
 		}
-		usleep(1000);	// sleep for 1ms
+		usleep(1000);
 	}
 }
