@@ -15,6 +15,24 @@
 
 # define _POSIX_C_SOURCE 200809L
 
+// Libraries
+# include "libft.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <string.h>
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/ioctl.h>
+# include <sys/stat.h>
+# include <signal.h>
+# include <dirent.h>
+# include <termio.h>
+# include <term.h>
+
 // Macros
 # define PROMPT "minishell$ "
 # define EXIT "exit\n"
@@ -43,25 +61,6 @@ typedef struct s_token
 	t_tokentype		type;
 	struct s_token	*next;
 }	t_token;
-
-// Libraries
-
-# include "libft.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <string.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <sys/types.h>
-# include <sys/ioctl.h>
-# include <sys/stat.h>
-# include <signal.h>
-# include <dirent.h>
-# include <termio.h>
-# include <term.h>
 
 // Function Declaration
 
