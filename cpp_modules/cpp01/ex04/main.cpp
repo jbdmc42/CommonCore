@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 	// 2. open the input file and check if it exists / can be read
 	std::ifstream inFile(filename.c_str());		// .c_str is required for C++ 98 open()
 	if (!inFile.is_open()) {
-		std::cerr << RED << "Error: cannot open file '" << CYAN << filename << RED << "' or it doesn't exist." << RESET << std::endl;
+		std::cerr << RED << "Error: cannot open file " << CYAN << filename << RED << " or it doesn't exist." << RESET << std::endl;
 		return (1);
 	}
 
@@ -64,7 +64,7 @@ int main(int argc, char **argv) {
 	std::string outFilename = filename + ".replace";
 	std::ofstream outFile(outFilename.c_str());
 	if (!outFile.is_open()) {
-		std::cerr << RED << "Error: could not create output file '" << CYAN << outFilename << RED << "'." << RESET << std::endl;
+		std::cerr << RED << "Error: could not create output file " << CYAN << outFilename << RED << "." << RESET << std::endl;
 		return (1);
 	}
 
@@ -72,6 +72,13 @@ int main(int argc, char **argv) {
 	outFile << result;
 	outFile.close();
 
-	std::cout << PURPLE << "Success: replaced content written to '" << CYAN << outFilename << PURPLE << "'." << RESET << std::endl;
+	std::cout << PURPLE << "Success: replaced content written to " << CYAN << outFilename << PURPLE << "." << RESET << std::endl;
+	std::cout << BROWNISH << "\n=============== TESTING ===============>" << RESET << std::endl;
+	std::cout << PURPLE << filename << ": " << RESET << std::endl;
+	std::cout << CYAN << fileContent << RESET << std::endl;
+	std::cout << BROWNISH << "=======================================>" << RESET << std::endl;
+	std::cout << PURPLE << outFilename << ": " << RESET << std::endl;
+	std::cout << CYAN << result << RESET << std::endl;
+	std::cout << BROWNISH << "============ TEST FINISHED ============>" << RESET << std::endl;
 	return (0);
 }
