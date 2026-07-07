@@ -18,7 +18,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp Contact.hpp PhoneBook.hpp
+%.o: %.cpp Zombie.hpp
 	$(CXX) $(CXXFLAGS) -I$(INCLUDES) -c $< -o $@
 
 clean:
