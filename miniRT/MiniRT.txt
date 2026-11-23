@@ -1,0 +1,65 @@
+MINIRT - Working Tree
+│
+├── 00. Project skeleton
+│
+├── 01. Program arguments
+│
+├── 02. MiniLibX window
+│
+├── 03. Basic scene data structures
+│
+├── 04. .rt file reading
+│
+├── 05. Parsing utilities
+│
+├── 06. Parse mandatory elements
+│   ├── Ambient
+│   ├── Camera
+│   └── Light
+│
+├── 07. Parse objects
+│   ├── Sphere
+│   ├── Plane
+│   └── Cylinder
+│
+├── 08. Parser validation
+│
+├── 09. Vector mathematics
+│
+├── 10. Ray mathematics
+│
+├── 11. Camera ray generation
+│
+├── 12. Sphere intersection
+│
+├── 13. Plane intersection
+│
+├── 14. Cylinder intersection
+│
+├── 15. Find closest intersection
+│
+├── 16. Surface normals
+│
+├── 17. Ambient lighting
+│
+├── 18. Diffuse lighting
+│
+├── 19. Shadows
+│
+├── 20. Final color calculation
+│
+├── 21. Render the image
+│
+├── 22. Put image into MiniLibX window
+│
+├── 23. Window events
+│
+├── 24. Object transformations
+│
+├── 25. Camera orientation
+│
+├── 26. Cylinder caps / inside handling
+│
+├── 27. Edge cases / error handling
+│
+└── 28. Testing / defense scenes
