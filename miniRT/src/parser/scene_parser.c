@@ -1,11 +1,5 @@
 #include "minirt.h"
 
-void	skip_newline(char *line, int *i) {
-	while (line[*i] &&
-		(line[*i] == '\n' || line[*i] == '\t' || line[*i] == ' '))
-		(*i)++;
-}
-
 static int	parse_line(t_data *data, char *line)
 {
 	int	i;

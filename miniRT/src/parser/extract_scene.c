@@ -1,7 +1,14 @@
 #include "minirt.h"
 
+void	skip_newline(char *line, int *i)
+{
+	while (line[*i]
+		&& (line[*i] == '\n' || line[*i] == '\t' || line[*i] == ' '))
+		(*i)++;
+}
+
 int	extract_ambient(t_data *data, char *line)
-{	
+{
 	int	i;
 
 	i = 1;

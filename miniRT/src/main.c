@@ -1,11 +1,11 @@
 #include "minirt.h"
 
-int		main(int argc, char **argv) 
+int	main(int argc, char **argv)
 {
 	if (argc != 2)
 	{
 		printf("Error: Invalid argument count.");
-		return(printf(" Usage: ./minirt <scene>\n"), E);
+		return (printf(" Usage: ./minirt <scene>\n"), E);
 	}
 	if (!input_validation(argv[1]))
 	{

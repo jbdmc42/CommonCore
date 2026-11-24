@@ -1,22 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   transform.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/11/05 14:29:39 by jpaulo-b          #+#    #+#             */
-/*   Updated: 2026/11/13 12:38:04 by jpaulo-b         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../../include/minirt.h"
-#include <X11/keysym.h>
-
-#define TRANSLATION_STEP 1.0
-#define ROTATION_STEP (5.0 * M_PI / 180.0)
-#define SIZE_STEP 0.1
-#define MIN_OBJECT_SIZE 0.1
+#include "minirt.h"
 
 static t_vector	rotate_x(t_vector vector, double angle)
 {

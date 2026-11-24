@@ -16,6 +16,10 @@
 # define TRANSFORM_CAMERA 0
 # define TRANSFORM_LIGHT 1
 # define TRANSFORM_OBJECT 2
+# define TRANSLATION_STEP 1.0
+# define ROTATION_STEP (5.0 * M_PI / 180.0)
+# define SIZE_STEP 0.1
+# define MIN_OBJECT_SIZE 0.1
 
 /* <===================================> */
 // Library Declarations
@@ -29,6 +33,9 @@
 # include <string.h> 
 # include <math.h>
 # include <sys/time.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
+# include <X11/Xlib.h>
 
 // MiniLibX
 # include "./minilibx/mlx.h"
@@ -172,6 +179,17 @@ typedef struct	s_data
 	int			selected_object;
 }	t_data;
 
+/* MiniLibX Linux stores these native handles as the first struct members. */
+typedef struct s_mlx_display_prefix
+{
+	Display	*display;
+}	t_mlx_display_prefix;
+
+typedef struct s_mlx_window_prefix
+{
+	Window	window;
+}	t_mlx_window_prefix;
+
 /* <===================================> */
 // Function Declarations
 
@@ -193,12 +211,12 @@ int	extract_sphere(t_data *data, char *line);
 int	extract_cylinder(t_data *data, char *line);
 
 // extract_scene.c:
+void	skip_newline(char *line, int *i);
 int	extract_ambient(t_data *data, char *line);
 int	extract_camera(t_data *data, char *line);
 int	extract_light(t_data *data, char *line);
 
 // scene_parser.c:
-void	skip_newline(char *line, int *i);
 int		parse_scene(t_data *data, const char *scene);
 
 
@@ -231,6 +249,9 @@ int		apply_transform_key(t_data *data, int keycode);
 
 // scene_renderer.c:
 int		render_scene(t_data *data);
+
+// scene_rendering_helpers.c:
+int		render_image(t_data *data);
 
 
 /* <======== tools ====================> */
@@ -269,4 +290,5 @@ t_vector	vector_scale(t_vector vector, double scale);
 /* Notes:
  => in this project, 'double' is used instead of 'int' in some occasions since it helps with 'float' type calculations.
 */
+
 #endif

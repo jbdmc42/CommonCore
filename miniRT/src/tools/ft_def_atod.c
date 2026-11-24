@@ -1,6 +1,6 @@
 #include "minirt.h"
 
-int		get_decimal(char *line, int dec, int i)
+int	get_decimal(char *line, int dec, int i)
 {
 	while (line[i] >= '0' && line[i] <= '9')
 	{
@@ -20,7 +20,7 @@ double	set_decimal(double val, int dec)
 	return (val);
 }
 
-int		get_signal(char *line, int sig, int *i)
+int	get_signal(char *line, int sig, int *i)
 {
 	while (line[*i] == '+' || line[*i] == '-')
 	{

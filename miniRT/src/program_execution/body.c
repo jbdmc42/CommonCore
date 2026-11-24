@@ -1,22 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   body.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/26 17:27:33 by jpaulo-b          #+#    #+#             */
-/*   Updated: 2026/10/28 17:14:37 by jpaulo-b         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "../../include/minirt.h"
+#include "minirt.h"
 
 /* Function print_data
 ** > this functions exists for debug and test purposes only
 ** > comment or remove it before sending
 */
-void	print_data(t_data *data)
+/* void	print_data(t_data *data)
 {
 	int i;
 	t_plane *plane;
@@ -86,7 +74,7 @@ void	print_data(t_data *data)
 		i++;
 	}
 	printf("\n");
-}
+} */
 
 static int	start_event_loop(t_data *data)
 {
@@ -94,15 +82,15 @@ static int	start_event_loop(t_data *data)
 	return (S);
 }
 
-int		program_execution(char *scene)
+int	program_execution(char *scene)
 {
 	t_data	data;
 
-    if (initialize_program(&data))
+	if (initialize_program(&data))
 		return (printf("\n──┬──\n  └─── failed initialization.\n\n"), E);
 	if (parse_scene(&data, scene))
 		return (printf("\n──┬──\n  └─── failed to parse the scene.\n\n"), E);
-	print_data(&data);	// debug purposes only
+	/* print_data(&data); */
 	if (render_scene(&data))
 		return (printf("Error: failed to render the scene.\n\n"), E);
 	if (start_event_loop(&data))

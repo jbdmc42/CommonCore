@@ -27,6 +27,7 @@ SRCS        = src/main.c \
 			src/program_execution/intersect.c \
 			src/program_execution/lighting.c \
 			src/program_execution/scene_renderer.c \
+			src/program_execution/scene_rendering_helpers.c \
 			src/program_execution/transform.c \
 			src/tools/ft_def_atod.c \
 			src/tools/ft_def_atoi.c \

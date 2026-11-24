@@ -1,32 +1,23 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   camera_rays.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jpaulo-b <jpaulo-b@student.42porto.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/27 16:38:33 by jpaulo-b          #+#    #+#             */
-/*   Updated: 2026/10/27 16:44:10 by jpaulo-b         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#include "minirt.h"
 
-#include "../../include/minirt.h"
+static int	initialize_camera_fov(const t_camera *camera, t_camera_frame *frame)
+{
+	double	fov_radians;
 
-int	initialize_camera_frame(const t_camera *camera, t_camera_frame *frame)
+	fov_radians = camera->fov * (M_PI / 180.0);
+	frame->half_view_height = tan(fov_radians / 2.0);
+	frame->half_view_width = frame->half_view_height
+		* ((double)WIDTH / (double)HEIGHT);
+	if (!isfinite(frame->half_view_width)
+		|| !isfinite(frame->half_view_height))
+		return (E);
+	return (S);
+}
+
+static int	initialize_camera_orientation(t_camera_frame *frame)
 {
 	t_vector	world_up;
-	double		forward_length;
-	double		fov_radians;
 
-	if (!camera || !frame || camera->fov <= 0 || camera->fov >= 180)
-		return (E);
-	forward_length = sqrt(camera->orientation.x * camera->orientation.x
-			+ camera->orientation.y * camera->orientation.y
-			+ camera->orientation.z * camera->orientation.z);
-	if (forward_length == 0.0 || !isfinite(forward_length))
-		return (E);
-	frame->origin = camera->position;
-	frame->forward = vector_norm(camera->orientation);
 	world_up.x = 0.0;
 	world_up.y = 1.0;
 	world_up.z = 0.0;
@@ -38,14 +29,25 @@ int	initialize_camera_frame(const t_camera *camera, t_camera_frame *frame)
 	}
 	frame->right = vector_norm(vector_cross(frame->forward, world_up));
 	frame->up = vector_cross(frame->right, frame->forward);
-	fov_radians = camera->fov * (M_PI / 180.0);
-	frame->half_view_height = tan(fov_radians / 2.0);
-	frame->half_view_width = frame->half_view_height
-		* ((double)WIDTH / (double)HEIGHT);
-	if (!isfinite(frame->half_view_width)
-		|| !isfinite(frame->half_view_height))
-		return (E);
 	return (S);
+}
+
+int	initialize_camera_frame(const t_camera *camera, t_camera_frame *frame)
+{
+	double	forward_length;
+
+	if (!camera || !frame || camera->fov <= 0 || camera->fov >= 180)
+		return (E);
+	forward_length = sqrt(camera->orientation.x * camera->orientation.x
+			+ camera->orientation.y * camera->orientation.y
+			+ camera->orientation.z * camera->orientation.z);
+	if (forward_length == 0.0 || !isfinite(forward_length))
+		return (E);
+	frame->origin = camera->position;
+	frame->forward = vector_norm(camera->orientation);
+	if (initialize_camera_orientation(frame) == E)
+		return (E);
+	return (initialize_camera_fov(camera, frame));
 }
 
 int	camera_ray_for_pixel(const t_camera_frame *frame, int x, int y,
