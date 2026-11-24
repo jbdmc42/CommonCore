@@ -26,6 +26,7 @@ SRCS        = src/main.c \
 			src/program_execution/initialization.c \
 			src/program_execution/intersect.c \
 			src/program_execution/lighting.c \
+			src/program_execution/rotation.c \
 			src/program_execution/scene_renderer.c \
 			src/program_execution/scene_rendering_helpers.c \
 			src/program_execution/transform.c \
